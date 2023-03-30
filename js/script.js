@@ -42,7 +42,6 @@ let menuSelectorStyles = [
 
 
 let colorUserIndex = ['#02CF2F', '#EE00D6', '#0190E0', '#FF7200', '#FF2500', '#AF1616', '#FFC700', '#3E0099', '#462F8A', '#FF7A00', '#000000'];
-
 let selectedMenuBtnId;
 let includeAttribute = 'w3-include-html';
 let desktopView;
@@ -69,7 +68,8 @@ async function init() {
 }
 
 /**
- * is also an async function that gets elements with the specified attribute, fetches the file specified in the attribute, and displays the contents of the file if the request was successful.
+ * is also an async function that gets elements with the specified attribute, fetches the file 
+ * specified in the attribute, and displays the contents of the file if the request was successful.
  */
 async function includeHTML() {
 	let includeElements = document.querySelectorAll(`[${includeAttribute}]`);
@@ -77,25 +77,21 @@ async function includeHTML() {
 		const element = includeElements[i];
 		file = element.getAttribute(`${includeAttribute}`);
 		let resp = await fetch(file);
-		if (resp.ok) {
-			element.innerHTML = await resp.text();
-		} else {
-			element.innerHTML = 'Page not found';
-		}
+		if (resp.ok) element.innerHTML = await resp.text();
+		else element.innerHTML = 'Page not found';
 	}
 }
 
 /**
- * sets the styles of the selected menu button based on whether it's the legal notice button or not.
- * @param {number} menuId 
+ * Sets the style of the selected menu button and updates the selectedMenuBtnId variable.
+ * If the selected menu is the legal notice and is not shown, sets the style of the menu button and
+ * updates the selectedMenuBtnId variable accordingly.
+ * 
+ * @param {string} menuId - The id of the selected menu button. 
  */
 function selectedMenuButton(menuId) {
-	if (selectedMenuNotShownAndNotLegalNotice(menuId) && selectedMenuBtnId != menuId) {
-		setMenuBtnStyle(menuId);
-	}
-	if (selectedMenuIsLegalNoticeAndNotShown && selectedMenuBtnId != menuId) {
-		setLegalNoticeBtnStyle(menuId);
-	}
+	if (selectedMenuNotShownAndNotLegalNotice(menuId) && selectedMenuBtnId != menuId) setMenuBtnStyle(menuId);
+	if (selectedMenuIsLegalNoticeAndNotShown && selectedMenuBtnId != menuId) setLegalNoticeBtnStyle(menuId);
 	selectedMenuBtnId = menuId;
 	enableDisableScrollContent();
 }
@@ -104,52 +100,52 @@ function selectedMenuButton(menuId) {
  * changes the overflow style of the content based on which menu button is selected.
  */
 function enableDisableScrollContent() {
-	if (selectedMenuBtnId == 4) {
-		document.getElementById('content').style = 'overflow: hidden; overflow-y: hidden;';
-	}
-	if (selectedMenuBtnId == 3 || selectedMenuBtnId == 2) {
-		document.getElementById('content').style = 'overflow: hidden; overflow-y: scroll;';
-	}
+	if (selectedMenuBtnId == 4) document.getElementById('content').style = 'overflow: hidden; overflow-y: hidden;';
+	if (selectedMenuBtnId == 3 || selectedMenuBtnId == 2) document.getElementById('content').style = 'overflow: hidden; overflow-y: scroll;';
 }
 
 /**
- * and
- * @param {number} menuId 
- * @returns 
+ * Checks if the currently selected menu button is not equal to the new menu button being passed in as `menuId`, 
+ * and if the new menu button is not equal to 5 (which is likely the ID for the legal notice menu button). 
+ *
+ * @param {number} menuId - The ID of the new menu button being selected.
+ * @returns {boolean} - True if the selected menu button is not equal to the new menu button and the new menu button 
+ * is not the legal notice button (ID 5), false otherwise.
  */
 function selectedMenuNotShownAndNotLegalNotice(menuId) {
 	return selectedMenuBtnId != menuId && menuId != 5;
 }
 
 /**
+ * Check selected menu is legal notice.
  * 
- * @param {number} menuId 
- * @returns  true if the selected menu is not shown and not the legal notice button or if it is the legal notice button and not shown, respectively.
+ * @param {number} menuId - Number equal to the selected menue.
+ * @returns  true if the selected menu is not shown and not the legal notice button or if it is the legal notice button 
+ * and not shown, respectively.
  */
 function selectedMenuIsLegalNoticeAndNotShown(menuId) {
 	return menuId == 5 && selectedMenuBtnId != 5;
 }
 
 /**
- * sets the style of the selected menu button, including the background color and image, and deselects the previously selected menu button if it is different. 
- * @param {number} menuId 
+ * sets the style of the selected menu button, including the background color and image, and deselects the previously 
+ * selected menu button if it is different. 
+ * 
+ * @param {number} menuId - Number equal to the selected menue.
  */
 function setMenuBtnStyle(menuId) {
 	let menuBtnId = menuSelectorStyles[menuId]['menuName'];
 	let img1Id = menuSelectorStyles[menuId]['img1Id'];
 	let img2Id = menuSelectorStyles[menuId]['img2Id'];
 	legalNoticeNotSelectedStyleAdd(menuBtnId, img1Id, img2Id);
-	if (otherMenuBtnPreSelected()) {
-		deselectMenuButton(selectedMenuBtnId);
-	}
-	if (!document.querySelector('.mobileContent')) {
-		setMenuBtnStyleSlider(menuId);
-	}
+	if (otherMenuBtnPreSelected()) deselectMenuButton(selectedMenuBtnId);
+	if (!document.querySelector('.mobileContent')) setMenuBtnStyleSlider(menuId);
 }
 
 /**
- * sets the style of the selected menu button if the menu is accessed through the slider
- * @param {number} menuId 
+ * Sets the style of the selected menu button if the menu is accessed through the slider.
+ * 
+ * @param {number} menuId - Number equal to the selected menue.
  */
 function setMenuBtnStyleSlider(menuId) {
 	let menuBtnId = menuSelectorStyles[menuId]['menuName'];
@@ -162,8 +158,9 @@ function setMenuBtnStyleSlider(menuId) {
 }
 
 /**
- * deselects the menu button if it's accessed through the slider. 
- * @param {number} menuId 
+ * Deselects the menu button if it's accessed through the slider. 
+ * 
+ * @param {number} menuId - Number equal to the selected menue. 
  */
 function deselectMenuButtonSlider(menuId) {
 	let menuBtnId = menuSelectorStyles[menuId]['menuName'];
@@ -172,19 +169,15 @@ function deselectMenuButtonSlider(menuId) {
 	menuBtnId = menuBtnId + '1';
 	img1Id = img1Id + '1';
 	img2Id = img2Id + '1';
-	if (legalNoticeNotSelected()) {
-		legalNoticeNotSelectedStyleRemove(menuBtnId, img1Id, img2Id);
-	}
-	if (legalNoticeSelected()) {
-		document.getElementById(menuBtnId).style = menuSelectorStyles[0]['disabledBackground'];
-	}
+	if (legalNoticeNotSelected()) legalNoticeNotSelectedStyleRemove(menuBtnId, img1Id, img2Id);
+	if (legalNoticeSelected()) document.getElementById(menuBtnId).style = menuSelectorStyles[0]['disabledBackground'];
 }
 
 /**
- * removes the style of the legal notice button if it is not selected. 
- * @param {number} menuBtnId 
- * @param {number} img1Id 
- * @param {number} img2Id 
+ * Removes the style of the legal notice button if it is not selected. 
+ * @param {string} menuBtnId - The id of the menu button element. 
+ * @param {string} img1Id - The id of the first image element. 
+ * @param {string} img2Id - The id of the second image element.
  */
 function legalNoticeNotSelectedStyleRemove(menuBtnId, img1Id, img2Id) {
 	document.getElementById(menuBtnId).style = menuSelectorStyles[0]['disabledBackground'];
@@ -194,10 +187,10 @@ function legalNoticeNotSelectedStyleRemove(menuBtnId, img1Id, img2Id) {
 }
 
 /**
- * adds the style of the legal notice button if it is not selected.
- * @param {number} menuBtnId 
- * @param {number} img1Id 
- * @param {number} img2Id 
+ * Adds the style of the legal notice button if it is not selected.
+ * @param {string} menuBtnId - The id of the menu button element. 
+ * @param {string} img1Id - The id of the first image element. 
+ * @param {string} img2Id - The id of the second image element.
  */
 function legalNoticeNotSelectedStyleAdd(menuBtnId, img1Id, img2Id) {
 	document.getElementById(menuBtnId).style = menuSelectorStyles[0]['background'];
@@ -207,6 +200,7 @@ function legalNoticeNotSelectedStyleAdd(menuBtnId, img1Id, img2Id) {
 }
 
 /**
+ * Returns the id of the selected menu.
  * 
  * @returns returns the id of the previously selected menu button.
  */
@@ -216,74 +210,43 @@ function otherMenuBtnPreSelected() {
 
 /**
  * sets the style of the legal notice button. 
- * @param {number} menuId 
+ *  @param {string} menuBtnId - The id of the menu button element. 
  */
 function setLegalNoticeBtnStyle(menuId) {
 	let menuBtnId = menuSelectorStyles[menuId]['menuName'];
 	let menuBtnId2 = menuSelectorStyles[menuId + 1]['menuName'];
-	if (menuBtnId) {
-		document.getElementById(menuBtnId).style = menuSelectorStyles[0]['background'];
-	}
-	if (menuBtnId2 == 'btnLegalNotice1') {
-		document.getElementById(menuBtnId2).style = menuSelectorStyles[0]['background'];
-	}
-	if (otherMenuBtnPreSelected()) {
-		deselectMenuButton(selectedMenuBtnId);
-	}
+	if (menuBtnId) document.getElementById(menuBtnId).style = menuSelectorStyles[0]['background'];
+	if (menuBtnId2 == 'btnLegalNotice1') document.getElementById(menuBtnId2).style = menuSelectorStyles[0]['background'];
+	if (otherMenuBtnPreSelected()) deselectMenuButton(selectedMenuBtnId);
 }
 
 /**
- * deselects the menu button, removes the style of the legal notice button if it is not selected, and removes the slider style.
- * @param {number} menuId 
+ * Deselects the menu button, removes the style of the legal notice button if it is not selected, and removes the slider style.
+ * @param {string} menuBtnId - The id of the menu button element.
  */
 function deselectMenuButton(menuId) {
 	let menuBtnId = menuSelectorStyles[menuId]['menuName'];
 	let img1Id = menuSelectorStyles[menuId]['img1Id'];
 	let img2Id = menuSelectorStyles[menuId]['img2Id'];
-	if (legalNoticeNotSelected()) {
-		legalNoticeNotSelectedStyleRemove(menuBtnId, img1Id, img2Id)
-	}
-	if (legalNoticeSelected()) {
-		document.getElementById(menuBtnId).style = menuSelectorStyles[0]['disabledBackground'];
-	}
-	if (!document.querySelector('.mobileContent')) {
-		deselectMenuButtonSlider(menuId);
-	}
+	if (legalNoticeNotSelected()) legalNoticeNotSelectedStyleRemove(menuBtnId, img1Id, img2Id);
+	if (legalNoticeSelected()) document.getElementById(menuBtnId).style = menuSelectorStyles[0]['disabledBackground'];
+	if (!document.querySelector('.mobileContent')) deselectMenuButtonSlider(menuId);
 }
 
 /**
- * and
- * @returns 
+ * Check legal notice not selected.
+ * @returns - False if the selected menu is not legal notice, otherwise true.
  */
 function legalNoticeNotSelected() {
 	return selectedMenuBtnId != 5;
 }
 
 /**
- * return true if the legal notice button is not selected and is selected, respectively.
- * @returns 
+ * Check legal notice selected.
+ * @returns - True if the selected menu is not legal notice, otherwise false. 
  */
 function legalNoticeSelected() {
 	return selectedMenuBtnId == 5;
-}
-
-/**
- * 
- * @param {number} menuId 
- */
-async function openSubPage(menuId) {
-	let url = menuSelectorStyles[menuId]['url'];
-	let target = '_parent';
-	await window.open(url, target);
-}
-
-/**
- * his function takes a menuId parameter and opens a new window with the URL associated with that menuId. The await keyword indicates that this function uses promises, and it will wait for the new window to load before continuing execution.
- */
-function renderList() {
-	renderSummary();
-	renderBoard();
-	renderLegalNotice();
 }
 
 /**
@@ -310,7 +273,10 @@ function loadContributorsLetter() {
 	document.getElementById('contributorsLogoHeadderLetters').innerHTML = `<p style='color:white'>${allUsers[loggedUser].firstSecondLetter}</p>`;
 }
 
-
+/**
+ * Initializes the highlighting of the mobile summary button by adding the 'initMobHighlight' class to it,
+ * and removes the class from the other mobile buttons.
+ */
 function initSummaryMobHighlight() {
 	document.getElementById('initSummaryMob').classList.add('initMobHighlight');
 	document.getElementById('initBoardMob').classList.remove('initMobHighlight');
@@ -318,7 +284,10 @@ function initSummaryMobHighlight() {
 	document.getElementById('initContactsMob').classList.remove('initMobHighlight');
 }
 
-
+/**
+ * Initializes the highlighting of the mobile board button by adding the 'initMobHighlight' class to it,
+ * and removes the class from the other mobile buttons.
+ */
 function initBoardMobHighlight() {
 	document.getElementById('initSummaryMob').classList.remove('initMobHighlight');
 	document.getElementById('initBoardMob').classList.add('initMobHighlight');
@@ -326,7 +295,10 @@ function initBoardMobHighlight() {
 	document.getElementById('initContactsMob').classList.remove('initMobHighlight');
 }
 
-
+/**
+ * Initializes the highlighting of the mobile addTask button by adding the 'initMobHighlight' class to it,
+ * and removes the class from the other mobile buttons.
+ */
 function initAddTaskMobHighlight() {
 	document.getElementById('initSummaryMob').classList.remove('initMobHighlight');
 	document.getElementById('initBoardMob').classList.remove('initMobHighlight');
@@ -334,7 +306,10 @@ function initAddTaskMobHighlight() {
 	document.getElementById('initContactsMob').classList.remove('initMobHighlight');
 }
 
-
+/**
+ * Initializes the highlighting of the mobile contacts button by adding the 'initMobHighlight' class to it,
+ * and removes the class from the other mobile buttons.
+ */
 function initContactsMobHighlight() {
 	document.getElementById('initSummaryMob').classList.remove('initMobHighlight');
 	document.getElementById('initBoardMob').classList.remove('initMobHighlight');

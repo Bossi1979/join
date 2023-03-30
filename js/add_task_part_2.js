@@ -1,6 +1,82 @@
 /**
- * this function determind all required fields are filled out.
- * @returns - returns true or false
+ * This function render the category field to a input field to create a new category and
+ * create on the right side of the category field a enter and cancel button for the new entered category name.
+ */
+function setSettingsForNewCategoryInput() {
+	document.getElementById('selectedCat').innerHTML = newCategoryInputHtml();
+	newCatInputActive = true;
+	enableDisableCatList();
+	document.getElementById('addTaskNewCatBtn').classList.remove('d-none');
+	document.getElementById('dropdownImg').classList.add('d-none');
+	document.getElementById('colorSelection').classList.remove('listD-none');
+	setInnerHtmlById('sColor', '');
+	addColorToCat(3);
+}
+
+/**
+ * This function perform the settings for the category field indication for a existing category.
+ * 
+ * @param {number} catId - This value is equal to the index of the category list of the selected category.
+ */
+function setSettingsForExistingCategory(catId) {
+	let newCat = addTaskCategoryList[catId]['category'];
+	let categoryColor = addTaskCategoryList[catId]['catColor'];
+	document.getElementById('selectedCat').innerHTML = existingCategoryHtml(newCat, categoryColor);
+	catColor = categoryColor;
+	enableDisableCatList();
+	document.getElementById('dropdownImg').classList.remove('d-none');
+	document.getElementById('colorSelection').classList.add('listD-none');
+}
+
+/**
+ * This function set the settings for a selected catogory of the submenu of the new category creation.
+ * @param {number} colorId
+ */
+function addColorToCat(colorId) {
+	if (catColor != '' || catColor == '0') {
+		document.getElementById('color' + catColor + 'Div').classList.remove('colorDivSelected');
+		catColor = '';
+	}
+	document.getElementById('color' + colorId + 'Div').classList.add('colorDivSelected');
+	catColor = colorId;
+}
+
+/**
+ * This function show a popup, that indicated that the new task is succsessfully created.
+ */
+function showAddDiv() {
+	document.getElementById('taskCreatedIndication').classList.add('taskCreatedIndication');
+}
+
+/**
+ * This function inhibited to show a popup, that indicated that the new task is succsessfuly created.
+ */
+function notShowAddDiv() {
+	document.getElementById('taskCreatedIndication').classList.remove('taskCreatedIndication');
+}
+
+/**
+ * This function check over some subfunction, all required form values are valid. If not it starts subfuction
+ * to indicated the required fields.
+ * 
+ * @param {number} workflow - This value is equal to the workflow status of the task,
+ * e.g. workflow status 0 is equal to 'To do' at board.
+ */
+function checkInputs(workflow) {
+	getReqiredFieldValues();
+	resetRequiredWarnings();
+	if (requiredFieldAreNotValid()) {
+		setRequiredTextWarnings();
+	} else {
+		createTaskData(workflow);
+	}
+}
+
+/**
+ * Checks if the required fields for creating a task are not valid.
+ * 
+ * @returns {boolean} - Returns true if any of the required fields
+ * (title, due date, category, description) are empty or if no priority level is selected; otherwise, returns false.
  */
 function requiredFieldAreNotValid() {
 	return title == '' || dueDate == '' || category == '' || descripten == '' || noPrioritySelected();
@@ -22,8 +98,7 @@ function currentDate() {
 }
 
 /**
- * The function setFutureDatesOnlyForInputDueDate()
- * sets the minimum date for the input element with
+ * The function setFutureDatesOnlyForInputDueDate() sets the minimum date for the input element with
  * the id of dueDate to the current date.
  */
 function setFutureDatesOnlyForInputDueDate() {
@@ -34,9 +109,7 @@ function setFutureDatesOnlyForInputDueDate() {
  * If the title is empty, make the titleReq element visible
  */
 function checkTitle() {
-	if (title == '') {
-		document.getElementById('titleReq').style = 'opacity: 1;';
-	}
+	if (title == '') document.getElementById('titleReq').style = 'opacity: 1;';
 }
 
 /**
@@ -46,18 +119,14 @@ function checkTitle() {
 function checkFutureDate() {
 	let inputDate = new Date(dueDate);
 	let currentDate = new Date();
-	if (inputDate < currentDate) {
-		document.getElementById('dateReq').style = 'opacity: 1';
-	}
+	if (inputDate < currentDate) document.getElementById('dateReq').style = 'opacity: 1';
 }
 
 /**
  * If the dueDate variable is empty, then make the dateReq div visible.
  */
 function checkDueDateExists() {
-	if (dueDate == '') {
-		document.getElementById('dateReq').style = 'opacity: 1;';
-	}
+	if (dueDate == '') document.getElementById('dateReq').style = 'opacity: 1;';
 }
 
 /**
@@ -74,9 +143,7 @@ function checkCategory() {
  * If the description is empty, make the description required message visible.
  */
 function checkDiscription() {
-	if (descripten == '') {
-		document.getElementById('descReq').style = 'opacity: 1;';
-	}
+	if (descripten == '') document.getElementById('descReq').style = 'opacity: 1;';
 }
 
 /**
@@ -86,9 +153,18 @@ function checkPriorityExists() {
 	if (noPrioritySelected()) showRequiredTextPriority();
 }
 
+/**
+ * Checks if no priority button has been selected.
+ * 
+ * @returns @returns {boolean} - Returns true if none of the priority buttons have been selected; otherwise, returns false.
+ */
 function noPrioritySelected() {
-	const notSelected = !urgentBtn.classList.contains('urgent-color') && !mediumBtn.classList.contains('medium-color') && !lowBtn.classList.contains('low-color') && !addTaskUrgent.classList.contains('urgent-color') && !addTaskMedium.classList.contains('medium-color') && !addTaskLow.classList.contains('low-color');
-	return notSelected;
+	return !urgentBtn.classList.contains('urgent-color') &&
+		!mediumBtn.classList.contains('medium-color') &&
+		!lowBtn.classList.contains('low-color') &&
+		!addTaskUrgent.classList.contains('urgent-color') &&
+		!addTaskMedium.classList.contains('medium-color') &&
+		!addTaskLow.classList.contains('low-color');
 }
 
 function showRequiredTextPriority() {
@@ -96,7 +172,7 @@ function showRequiredTextPriority() {
 }
 
 /**
- * this function enable or disable the indication 'this field is required'.
+ * This function enable or disable the indication 'this field is required'.
  */
 function setRequiredTextWarnings() {
 	checkTitle();
@@ -108,7 +184,7 @@ function setRequiredTextWarnings() {
 }
 
 /**
- * this function get all required fields values.
+ * This function get all required fields values.
  */
 function getReqiredFieldValues() {
 	title = document.getElementById('addTaskTitle').value;
@@ -117,16 +193,13 @@ function getReqiredFieldValues() {
 	dueDate = dueDate.trim();
 	descripten = document.getElementById('addTaskDescripten').value;
 	descripten = descripten.trim();
-	if (newCatInputActive) {
-		category = document.getElementById('selectedCatInput').value;
-	} else {
-		category = document.getElementById('selectedCatInput').innerHTML;
-	}
+	if (newCatInputActive) category = document.getElementById('selectedCatInput').value;
+	else category = document.getElementById('selectedCatInput').innerHTML;
 	category = category.trim();
 }
 
 /**
- * this function disable all 'This field is required' indications.
+ * This function disable all 'This field is required' indications.
  */
 function resetRequiredWarnings() {
 	document.getElementById('titleReq').style = 'opacity: 0;';
@@ -163,21 +236,6 @@ function clearTaskTitleAndDescription() {
 }
 
 /**
- * Clears the selected category and resets the category dropdown to its default state
- */
-function clearSelectedCategory() {
-	document.getElementById('selectedCat').innerHTML = /*html*/`
-	  <input disabled id='selectedCatInput' placeholder='Select task category' autocomplete='off'>
-	  <span id='sColor'></span>
-	  <div class='newCategoryImgDiv d-none' id='addTaskNewCatBtn'>
-		<img src="./assets/img/new_cat_cancel.png">
-		<img src="./assets/img/bnt_divider.png" class='btnDivider'>
-		<img src="./assets/img/akar-icons_check.png">
-	  </div>
-	  <img src="./assets/img/Vector 2.png" class='dropdownImg' id='dropdownImg'>`;
-}
-
-/**
  * Clears the due date field.
  */
 function clearDueDate() {
@@ -203,10 +261,11 @@ function clearValidationMessages() {
 }
 
 /**
-*Creates a new task and saves it to the task list.
-@param {string} workflow - The workflow status of the new task.
-@returns {Promise<void>} - A Promise that resolves when the task data is successfully saved.
-*/
+ * Creates a new task and saves it to the task list
+ * 
+ * @param {string} workflow - The workflow status of the new task.
+ * @returns {Promise<void>} - A Promise that resolves when the task data is successfully saved.
+ */
 async function createTaskData(workflow) {
 	await loadTask();
 	getDataFromFomular();
@@ -215,20 +274,37 @@ async function createTaskData(workflow) {
 	fillTaskData(workflow);
 	pushTaskData();
 	saveTask();
-	// showAddDiv();
 	setTimeout(initBoard, 1200);
 	resetAssignToList();
 	clearFormularData();
 }
 
 /**
-*Checks if at least one subtask has been selected. If not, adds a default subtask.
-*@returns - {Promise<void>} - Promise object that resolves with no value.
-*/
+ * Checks if at least one subtask has been selected. If not, adds a default subtask.
+ * @returns - {Promise<void>} - Promise object that resolves with no value.
+ */
 async function minOneSubtask() {
-	if (selectedSubtasks.length == 0) {
-		selectedSubtasks = [{ subtaskText: 'Maintask', subtaskStatus: true }];
+	if (noSubtaskSelected()) {
+		alert('At least one subtask is required! A subtask is set automatically.');
+		setDefaultSubtask();
 	}
+}
+
+
+/**
+ * Checks if there are no selected subtasks, alerts the user, and returns true.
+ * 
+ * @returns {boolean} - Returns true if there are no selected subtasks; otherwise, returns false. 
+ */
+function noSubtaskSelected() {
+	return selectedSubtasks.length == 0;
+}
+
+/**
+ * Sets the selectedSubtasks array to a default subtask object.
+ */
+function setDefaultSubtask() {
+	selectedSubtasks = [{ subtaskText: 'Subtask', subtaskStatus: true }];
 }
 
 /**
@@ -245,17 +321,43 @@ function getDataFromFomular() {
 * The resulting array is assigned to the global variable assignToArray.
 */
 async function createAssignToListForSave() {
-	assignToArray = [];
+	clearAssignToArray();
 	for (let i = 0; i < coworkersToAssignTo.length; i++) {
-		let checkStatus = coworkersToAssignTo[i]['check'];
-		if (checkStatus) {
-			assignToArray.push(coworkersToAssignTo[i]);
-		}
+		if (coworkerSelected(i)) addToAssignToList(i);
 	}
 }
 
 /**
- * this fuction collect all data for the Taskcard in a JSON format.
+ * Clear the AssignToArray.
+ */
+function clearAssignToArray() {
+	assignToArray = [];
+}
+
+/**
+ * Check the coworker selected.
+ * 
+ * @param {i} i - Index of the coworkers List.
+ * @returns - True if the coworker is selected as assigned to.
+ */
+function coworkerSelected(i) {
+	return coworkersToAssignTo[i]['check'];
+}
+
+/**
+ * Add the coworker to the assign to list.
+ * 
+ * @param {i} i - Index of the coworkers List.
+ */
+function addToAssignToList(i) {
+	assignToArray.push(coworkersToAssignTo[i]);
+}
+
+/**
+ * Creates an object that represents a task, with various properties including 
+ * the task's title, description, due date, category, priority, subtasks, and workflow status.
+ * 
+ * @param {number} workflow - A number representing the workflow status of the task.
  */
 function fillTaskData(workflow) {
 	setSubtaskStatusForBoardToFalse();
@@ -284,7 +386,7 @@ function setSubtaskStatusForBoardToFalse() {
 }
 
 /**
- * this function push all Taskdata to the main Array.
+ * This function push all Taskdata to the main Array.
  */
 function pushTaskData() {
 	joinTaskArray.push(taskData);
@@ -292,105 +394,5 @@ function pushTaskData() {
 
 // deleteJoinTaskArrayFromServer() is not used in this code, it is only to remove the Array from Server!!!!!!!!!!!
 async function deleteJoinTaskArrayFromServer() {
-	// localStorage.removeItem('joinTaskArray');
 	await backend.deleteItem('joinTaskArray');
 }
-
-/**
- * Updates the source of the "clear" image element in the add task form to display a blue "close" logo.
- */
-function addTaskClearOn() {
-	document.getElementById('addTaskClear').src = '././assets/img/close_logo_blue.png';
-}
-
-/**
- * Sets the image source of the "addTaskClear" element to "./assets/img/close_logo.png", which changes the appearance of the image.
- */
-function addTaskClearOff() {
-	document.getElementById('addTaskClear').src = './assets/img/close_logo.png';
-}
-
-/**
- * Adds priority to task based on selected button.
- * @param {Number} - prioIdIndex 
- */
-async function addPrio(prioIdIndex) {
-	let idList = ['addTaskUrgent', 'addTaskMedium', 'addTaskLow'];
-	let selectedId = idList[+prioIdIndex];
-	let cListLength = document.getElementById(selectedId).classList.length;
-	let btnName = selectedId.replace('addTask', '');
-	idList.splice(prioIdIndex, 1);
-	if (btnNotSelected(cListLength)) {
-		selectPrioBtn(selectedId, btnName);
-		unselectOtherBtn(idList);
-	} else {
-		removeBtnSelection(btnName);
-	}
-}
-
-/**
- * Checks if a button is currently not selected based on the number of its CSS classes.
- *
- * @param {number} cListLength - The number of CSS classes of the button.
- * @returns {boolean} - True if the button is not selected, false otherwise.
- */
-function btnNotSelected(cListLength) {
-	return cListLength == 1;
-}
-
-/**
- * Selects and styles the priority button when clicked.
- * @param {string} selectedId - The id of the selected priority button.
- * @param {string} btnName - The name of the selected priority button.
- */
-function selectPrioBtn(selectedId, btnName) {
-	document.getElementById(selectedId).classList.add(`${btnName.toLowerCase()}-color`);
-	document.getElementById(`addTask${btnName}Span`).classList.add('color-white');
-	document.getElementById(`addTask${btnName}Img`).src = `./assets/img/${btnName.toLowerCase()}_white.png`;
-	prio = btnName;
-}
-
-/**
- * Removes the selection from the priority button of the given name.
- * @param {string} btnName - The name of the priority button to deselect.
- */
-function removeBtnSelection(btnName) {
-	document.getElementById(`addTask${btnName}`).classList.remove(`${btnName.toLowerCase()}-color`);
-	document.getElementById(`addTask${btnName}Span`).classList.remove('color-white');
-	document.getElementById(`addTask${btnName}Img`).src = `./assets/img/${btnName.toLowerCase()}.png`;
-}
-
-/**
-* Unselects other buttons and removes their styling if they are currently selected.
-* @param {string[]} idList - An array of strings representing the IDs of the buttons to unselect.
-*/
-function unselectOtherBtn(idList) {
-	for (let i = 0; i < idList.length; i++) {
-		let selectedId = idList[i];
-		let cListLength = document.getElementById(selectedId).classList.length;
-		let btnName = selectedId.replace('addTask', '');
-		if (btnIsSelected(cListLength)) {
-			document.getElementById(`addTask${btnName}`).classList.remove(`${btnName.toLowerCase()}-color`);
-			document.getElementById(`addTask${btnName}Span`).classList.remove('color-white');
-			document.getElementById(`addTask${btnName}Img`).src = `./assets/img/${btnName.toLowerCase()}.png`;
-		}
-	}
-}
-
-/**
- * Checks if a button is currently selected.
- * @param {number} cListLength - The length of the class list of the button element.
- * @returns {boolean} - True if the button is currently selected, false otherwise.
- */
-function btnIsSelected(cListLength) {
-	return cListLength == 2;
-}
-
-/**
- * Hides the "cross" icon and shows the "subtask" icon when a user enters text in the subtask input field.
- */
-function subTaskInputentered() {
-	document.getElementById('subtaskCross').classList.add('d-none');
-	document.getElementById('subTaskImgDiv').classList.remove('d-none');
-}
-

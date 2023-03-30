@@ -1,3 +1,6 @@
+/**
+ * Back to login page.
+ */
 function backToLogIn() {
 	window.location.href = './loginDesk.html';
 }
@@ -5,7 +8,6 @@ function backToLogIn() {
 /**
  * It checks the input formatting of the sign up form.
  */
-// check input formatting
 function inputValueTest() {
 	let name = document.getElementById('inputNameSignUp');
 	let email = document.getElementById('inputEmailSignUp');
@@ -21,6 +23,7 @@ function inputValueTest() {
 /**
  * If there are no users, then call the firstAndSecondLetter function, otherwise call the
  * comparisonEmail function.
+ * 
  * @param name - the name of the user
  * @param email - the email that the user entered
  * @param password - the password the user entered
@@ -29,15 +32,13 @@ function inputValueTest() {
 async function emailToCheck(name, email, password) {
 	await loadTask();
 	let requiredEmail = document.getElementById('requiredEmail');
-	if (!allUsers) {
-		firstAndSecondLetter(name, email, password);
-	} else {
-		comparisonEmail(requiredEmail, name, email, password);
-	}
+	if (!allUsers)  firstAndSecondLetter(name, email, password);
+	else comparisonEmail(requiredEmail, name, email, password);
 }
 
 /**
  * It takes in 6 parameters, pushes them into an array, and then saves the array to local storage.
+ * 
  * @param firstLetter - The first letter of the user's name
  * @param secondLetter - the second letter of the user's name
  * @param name - the name of the user
@@ -45,7 +46,6 @@ async function emailToCheck(name, email, password) {
  * @param password - the password the user entered
  * @param colorIndex - the index of the color in the color array
  */
-// save user data and forward to login site
 async function userSignIn(firstLetter, secondLetter, name, email, password, colorIndex) {
 	await loadTask();
 	allUsers.push({
@@ -70,12 +70,8 @@ function forwardScript() {
 		if (document.getElementById('new_contact').classList.contains('add_contact_slide')) {
 			closeNewContact();
 			setTimeout(userInAlphabetArray, 500);
-		} else {
-			window.location.href = './loginDesk.html';
-		}
-	} else {
-		window.location.href = './loginDesk.html';
-	}
+		} else window.location.href = './loginDesk.html';
+	} else window.location.href = './loginDesk.html';
 }
 
 /**
@@ -95,9 +91,6 @@ function contactSucc() {
 function passwordShowIcon(x) {
 	document.getElementById(`passwordLogo${x}`).classList.toggle('d-none');
 	document.getElementById(`pwShowButton${x}`).classList.toggle('d-none');
-	if (document.getElementById('passwordLogo').classList.contains('d-none')) {
-		document.getElementById(`inputPassword${x}`).type = 'text';
-	} else {
-		document.getElementById(`inputPassword${x}`).type = 'password';
-	}
+	if (document.getElementById('passwordLogo').classList.contains('d-none')) document.getElementById(`inputPassword${x}`).type = 'text';
+	else document.getElementById(`inputPassword${x}`).type = 'password';
 }

@@ -1,13 +1,22 @@
+/**
+ * Init the Help Site.
+ */
 async function initHelp() {
     await renderHelp();
     logOutBtn();
 }
 
+/**
+ * Init the summary site.
+ */
 function back() {
     initSummary();
 }
 
-function renderHelp() {
+/**
+ * Render the Help Html.
+ */
+async function renderHelp() {
     document.getElementById('content').innerHTML = '';
     document.getElementById('content').innerHTML += /*html*/ `
     <div class="helpContainer">

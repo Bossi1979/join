@@ -25,13 +25,27 @@ let arrayMoveBtnText = [
 
 
 /**
- * When the user types in the search field, get the search term and convert it to lowercase. Then, for
- * each card, get the card title and convert it to lowercase. If the card title contains the search
- * term, display the card. Otherwise, hide the card.
+ * The function deleteButton() takes the taskIndex as a parameter and removes the task from the
+ * joinTaskArray at the taskIndex position. Then it saves the task and initializes the board.
+ * @param taskIndex - The index of the task in the array.
+ */
+async function deleteButton(taskIndex) {
+	joinTaskArray.splice(taskIndex, 1);
+	await saveTask();
+	await renderBoard();
+	await createWorkStatusArrays();
+	renderAllCards();
+}
+
+/**
+ * Sets up an event listener for the search input field and searches tasks on the board.
+ * Retrieves all elements with the class .taskBackground and iterates through each one,
+ * comparing the text content of its title and description to the search term entered into
+ * the input field. If the search term is found in the title or description, the card is
+ * displayed, otherwise it is hidden.
  */
 function startSearch() {
-	let cards = document.querySelectorAll('.taskBackground'); // Select all elements with class "taskBackground"
-
+	let cards = document.querySelectorAll('.taskBackground');
 	document.getElementById('searchField').addEventListener('input', function () {
 		searchTerm = this.value.trim().toLowerCase();
 		cards.forEach(function (card) {
@@ -39,9 +53,7 @@ function startSearch() {
 			let cardDescription = card.querySelector('.taskContent').textContent.toLowerCase();
 			if (cardTitle.indexOf(searchTerm) !== -1 || cardDescription.indexOf(searchTerm) !== -1) {
 				card.style.display = 'block';
-			} else {
-				card.style.display = 'none';
-			}
+			} else card.style.display = 'none';
 		});
 	});
 }
@@ -56,7 +68,6 @@ function searchAfterPopup() {
 /**
  * It searches for the search term in the title and description of the cards and displays the cards
  * that contain the search term.
- * </code>
  */
 function searchAfterPopupDesktop() {
 	let cards = document.querySelectorAll('.taskBackground');
@@ -68,9 +79,7 @@ function searchAfterPopupDesktop() {
 				let cardDescription = card.querySelector('.taskContent').textContent.toLowerCase();
 				if (cardTitle.indexOf(searchTerm) !== -1 || cardDescription.indexOf(searchTerm) !== -1) {
 					card.style.display = 'block';
-				} else {
-					card.style.display = 'none';
-				}
+				} else card.style.display = 'none';
 			});
 		}
 	}
@@ -78,8 +87,6 @@ function searchAfterPopupDesktop() {
 
 /**
  * Searches for cards containing the search term in the mobile view.
- * @function
- * @returns {void}
  */
 function searchAfterPopupMobil() {
 	let cards = document.querySelectorAll('.taskBackgroundMobil');
@@ -91,9 +98,7 @@ function searchAfterPopupMobil() {
 				let cardDescription = card.querySelector('.taskContentMobil').textContent.toLowerCase();
 				if (cardTitle.indexOf(searchTerm) !== -1 || cardDescription.indexOf(searchTerm) !== -1) {
 					card.style.display = 'block';
-				} else {
-					card.style.display = 'none';
-				}
+				} else card.style.display = 'none';
 			});
 		}
 	}
@@ -101,10 +106,8 @@ function searchAfterPopupMobil() {
 
 /**
  * Renders a move button after a change has been made to a subtask, waiting for the changes to be saved first.
- * @async
- * @function
+ *
  * @param {number} taskIndex - The index of the task that was modified.
- * @returns {Promise<void>} - A promise that resolves when the move button is rendered.
  */
 async function renderBtnBySubtaskChange(taskIndex) {
 	await saveChangesDetailView();
@@ -113,9 +116,6 @@ async function renderBtnBySubtaskChange(taskIndex) {
 
 /**
  * Saves the changes made to a task's details view, creates work status arrays and renders all cards.
- * @async
- * @function saveChangesDetailView
- * @returns {Promise<void>} A Promise that resolves once the changes have been saved and rendered.
  */
 async function saveChangesDetailView() {
 	await saveTask();
@@ -126,10 +126,7 @@ async function saveChangesDetailView() {
 /**
  * Renders move buttons in the mobile view for a given task index.
  *
- * @async
- * @function renderMoveBtnMobil
  * @param {number} taskIndex - The index of the task to render the move buttons for.
- * @returns {Promise} A promise that resolves when the move buttons are rendered.
  */
 async function renderMoveBtnMobil(taskIndex) {
 	document.getElementById('moveBtnMobil').innerHTML = '';
@@ -137,9 +134,7 @@ async function renderMoveBtnMobil(taskIndex) {
 	let buttonArray = arrayMoveBtnText[workStatus]['btn'];
 	let forLoppEndValue = buttonArray.length;
 	let newStatusArray = arrayMoveBtnText[workStatus]['newStatus'];
-	if (workStatus >= 1 && workStatus < 3) {
-		forLoppEndValue = taskCardAllowMove(taskIndex);
-	}
+	if (workStatus >= 1 && workStatus < 3) forLoppEndValue = taskCardAllowMove(taskIndex);
 	for (let i = 0; i < forLoppEndValue; i++) {
 		let buttonText = buttonArray[i];
 		let newTaskStatus = newStatusArray[i];
@@ -160,10 +155,7 @@ function closeBoardMobilDetailOverlay() {
  * `renderMoveBtnMobil` function to update the move button with the new available options based on the
  * current status of the card.
  *
- * @async
- * @function renderBtnBySubtaskChange
  * @param {number} taskIndex - The index of the task card whose move button needs to be updated.
- * @returns {Promise<void>} A Promise that resolves when the move button has been updated.
  */
 async function renderBtnBySubtaskChange(taskIndex) {
 	await saveChangesDetailView();
@@ -172,10 +164,6 @@ async function renderBtnBySubtaskChange(taskIndex) {
 
 /**
  * Saves the task, creates the work status arrays, and re-renders all cards.
- *
- * @async
- * @function saveChangesDetailView
- * @returns {Promise<void>}
  */
 async function saveChangesDetailView() {
 	await saveTask();
@@ -186,10 +174,7 @@ async function saveChangesDetailView() {
 /**
  * Renders move buttons on the mobile view of a task card, based on its current workFlowStatus.
  *
- * @async
- * @function renderMoveBtnMobil
  * @param {number} taskIndex - The index of the task to render move buttons for.
- * @returns {Promise<void>} - A Promise that resolves when the move buttons have been rendered.
  */
 async function renderMoveBtnMobil(taskIndex) {
 	document.getElementById('moveBtnMobil').innerHTML = '';
@@ -197,28 +182,12 @@ async function renderMoveBtnMobil(taskIndex) {
 	let buttonArray = arrayMoveBtnText[workStatus]['btn'];
 	let forLoppEndValue = buttonArray.length;
 	let newStatusArray = arrayMoveBtnText[workStatus]['newStatus'];
-	if (workStatus >= 1 && workStatus < 3) {
-		forLoppEndValue = taskCardAllowMove(taskIndex);
-	}
+	if (workStatus >= 1 && workStatus < 3) forLoppEndValue = taskCardAllowMove(taskIndex);
 	for (let i = 0; i < forLoppEndValue; i++) {
 		let buttonText = buttonArray[i];
 		let newTaskStatus = newStatusArray[i];
 		renderMoveBtnMobilHtml(buttonText, newTaskStatus, taskIndex);
-
 	}
-}
-
-/**
- * Renders the HTML code for a button to move tasks on mobile devices.
- * @param {string} buttonText - The text to be displayed on the button.
- * @param {string} newTaskStatus - The new status of the task being postponed.
- * @param {number} taskIndex - The index of the task being moved.
- */
-function renderMoveBtnMobilHtml(buttonText, newTaskStatus, taskIndex) {
-	document.getElementById('moveBtnMobil').innerHTML += /*html*/ `
-    <button onclick='moveMobilTaskTo(${taskIndex}, ${newTaskStatus})'>
-        ${buttonText}
-    </button>`;
 }
 
 /**

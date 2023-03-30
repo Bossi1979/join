@@ -166,6 +166,7 @@ function assignBoxBackToDefaultMode() {
 /**
  * Find the index of the member of the task force whose email address is the same as the email address
  * passed in as a parameter.
+ * 
  * @param emailAddressLoggedUser - The email address of the member of the task force.
  * @returns The index of the member of the task force.
  */
@@ -227,6 +228,7 @@ function addRemoveToggleForTaskForce(addedToTaskForce, contact, indexOfMemberInT
 /**
  * It adds a contact to the task force if the contact is not already in the task force, and removes the
  * contact from the task force if the contact is already in the task force.
+ * 
  * @param contact - the name of the contact
  */
 function addContactToTaskForceWithCheckBox(contact) {
@@ -250,11 +252,10 @@ async function renderContactsInAssignDropDownMenu() {
 }
 
 /**
- *
- * @param {object} coworker
- * @param {number} contact
- * @returns boolean
- * !NAME UND FUNKTION ÜBERARBEITEN
+ * Determines if the given contact is not the logged-in user.
+ * 
+ * @param {number} contact - The index of the contact.
+ * @returns {boolean} - True if the contact is not the logged-in user, false otherwise.
  */
 function notLoggedUser(contact) {
 	return contact !== loggedInUserIndex;
@@ -271,7 +272,7 @@ async function renderLoggedUserInAssignDrobDownMenuIntoYou() {
 }
 
 /**
- * Sets check status to false
+ * Sets check status to false.
  */
 function checkStatusToFalse() {
 	coworkersToAssignTo.forEach((coworker, i) => {
@@ -312,16 +313,16 @@ function hideBadgesTaskForce() {
 }
 
 /**
- * Closes assignTo-List if open
- * @param {boolean} assignListStatus
+ * Closes the "Assign To" dropdown list if it is open.
  */
 function closeDropDownAssignTo() {
 	assignListStatus ? enableDisableAssignList() : null;
 }
 
 /**
- * Sets taskForce and assignTo checkMarks to default mode; restricteds in guestLogIn
- * @param {boolean} guestLoggedIn
+ * Clears the task force array and updates the rendering of badges indicating the members of the task force.
+ * If the user is not a guest, it sets the "check" status of all coworkers in the list to false.
+ * It also closes the assign to drop-down menu.
  */
 function clearTaskForce() {
 	if (!guestLoggedIn) checkStatusToFalse();

@@ -9,6 +9,7 @@ const passwordTest = /^(?=.*\d)(?=.*[a-z])(?=.*[A-Z])(?!.*\s).{8,}$/;
  * the email field is less than 8 characters, does not contain an @ or ., or starts with a space, check
  * if the password field is empty or starts with a space, and if all of the above are false, run the
  * emailToCheck function.
+ * 
  * @param {name} - the name input field
  * @param email - the email input
  * @param password - the password input
@@ -19,7 +20,26 @@ const passwordTest = /^(?=.*\d)(?=.*[a-z])(?=.*[A-Z])(?!.*\s).{8,}$/;
  */
 function calculateinputValueTest(name, email, password, requiredName, requiredEmail, requiredPassword) {
 	if (name.value || email.value || password.value) {
-		if (nameTest.test(name.value)) requiredName.classList.remove('requiredOn');
+		LogIninputValidation(name, email, password, requiredName, requiredEmail, requiredPassword)
+	} else {
+		requiredName.classList.add('requiredOn');
+		requiredEmail.classList.add('requiredOn');
+		requiredPassword.classList.add('requiredOn');
+	}
+}
+
+/**
+ * Check the input login values.
+ * @param {name} - the name input field
+ * @param email - the email input
+ * @param password - the password input
+ * @param requiredName - the span element that will be added to the name input
+ * @param requiredEmail - the span element that will be added to the DOM if the email input is invalid
+ * @param requiredPassword - the element that will be added the class 'requiredOn' if the password
+ * input is empty or starts with a space.
+ */
+function LogIninputValidation(name, email, password, requiredName, requiredEmail, requiredPassword){
+	if (nameTest.test(name.value)) requiredName.classList.remove('requiredOn');
 		else requiredName.classList.add('requiredOn');
 		if (emailTest.test(email.value)) requiredEmail.classList.remove('requiredOn');
 		else requiredEmail.classList.add('requiredOn');
@@ -28,11 +48,6 @@ function calculateinputValueTest(name, email, password, requiredName, requiredEm
 		if (!requiredName.classList.contains('requiredOn') && !requiredEmail.classList.contains('requiredOn') && !requiredPassword.classList.contains('requiredOn')) {
 			emailToCheck(name.value, email.value, password.value);
 		}
-	} else {
-		requiredName.classList.add('requiredOn');
-		requiredEmail.classList.add('requiredOn');
-		requiredPassword.classList.add('requiredOn');
-	}
 }
 
 /**
@@ -58,15 +73,14 @@ function comparisonEmail(requiredEmail, name, email, password) {
 	if (check == 1) {
 		requiredEmail.classList.add('requiredOn');
 		requiredEmail.innerHTML = `This email address is not available!!`;
-	} else {
-		calculateAllUserArray(name, email, password);
-	}
+	} else calculateAllUserArray(name, email, password);
 }
 
 /**
  * This function takes in a name, email, and password, and then calls the calcSecondLetter function,
  * which returns a second letter, and then calls the calcColorIndex function, which returns a color
  * index, and then calls the userSignIn function, which returns a user object.
+ * 
  * @param name - the user's name
  * @param email - string
  * @param password - string
@@ -81,6 +95,7 @@ async function calculateAllUserArray(name, email, password) {
 /**
  * It takes a string, finds the index of the space, then takes the substring from the space to the end
  * of the string, then takes the first letter of that substring.
+ * 
  * @param name - the name of the person
  * @returns The second letter of the second name.
  */
@@ -94,6 +109,7 @@ function calcSecondLetter(name) {
 /**
  * It takes two letters, converts them to their ASCII values, adds them together, and then returns the
  * remainder of that sum divided by 10.
+ * 
  * @param firstLetter - The first letter of the name of the person you want to get the color for.
  * @param secondLetter - The second letter of the name of the person you want to get the color for.
  * @returns The colorIndex is being returned.

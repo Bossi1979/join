@@ -44,13 +44,11 @@ async function initBoardNormal() {
 }
 
 /**
- * this function render the basic board html structur into the HTML template div content.
+ * This function render the basic board html structur into the HTML template div content.
  */
 async function renderBoard() {
 	document.getElementById('content').innerHTML = '';
-	if (!(selectedMenuBtnId == 2)) {
-		await loadTask();
-	}
+	if (!(selectedMenuBtnId == 2)) await loadTask();
 	document.getElementById('content').innerHTML += boardHtml();
 }
 
@@ -67,19 +65,28 @@ async function resetWorkStatusArrays() {
 }
 
 /**
- * For each element in the joinTaskArray, if the element's workFlowStatus is equal to the index, then
- * createWorkStatusArrayData(index, i)
+ * Creates arrays for each workflow status (to do, in progress, awaiting feedback, done).
+ * Iterates over joinTaskArray to get all tasks and their status.
+ * Calls createWorkStatusArrayData to add task data to appropriate workflow status array.
  */
 async function createWorkStatusArrays() {
 	await resetWorkStatusArrays();
 	for (let index = 0; index < 4; index++) {
 		for (let i = 0; i < joinTaskArray.length; i++) {
 			let taskWorkStatus = joinTaskArray[i]['workFlowStatus'];
-			if (taskWorkStatus == index) {
-				createWorkStatusArrayData(index, i);
-			}
+			if (workflowStatusIsEqual(taskWorkStatus, index)) createWorkStatusArrayData(index, i);
 		}
 	}
+}
+
+/**
+ * Returns whether the given `taskWorkStatus` is equal to the given `index`.
+ * @param {number} taskWorkStatus - The `workFlowStatus` of a task.
+ * @param {number} index - The index to compare to the `taskWorkStatus`.
+ * @returns {boolean} `true` if `taskWorkStatus` equals `index`, `false` otherwise.
+ */
+function workflowStatusIsEqual(taskWorkStatus, index) {
+	return taskWorkStatus == index;
 }
 
 /**
@@ -193,16 +200,25 @@ function renderAssignTo() {
 function determindSubTasksDone(arrayIndex, workStatusArrayNo) {
 	let doneAmount = 0;
 	for (let i = 0; i < workStatusArray[workStatusArrayNo][arrayIndex]['subTasks'].length; i++) {
-		let subTaskStatus = workStatusArray[workStatusArrayNo][arrayIndex]['subTasks'][i]['subtaskStatus'];
-		if (subTaskStatus) {
-			doneAmount += 1;
-		}
+		if (subtaskDone(workStatusArrayNo, arrayIndex, i)) doneAmount += 1;
 	}
 	return doneAmount;
 }
 
 /**
- * this function set the backgroundcolor of the catogory in the todo task card.
+ * Check the Subtasks of the task done or not.
+ * 
+ * @param workStatusArrayNo - the index of the workStatusArray that you want to check.
+ * @param arrayIndex - the index of the task in the array. 
+ * @param {number} i - index of the subtask array.
+ * @returns True if subtask is done. Otherwise false.
+ */
+function subtaskDone(workStatusArrayNo, arrayIndex, i) {
+	return workStatusArray[workStatusArrayNo][arrayIndex]['subTasks'][i]['subtaskStatus'];
+}
+
+/**
+ * This function set the backgroundcolor of the catogory in the todo task card.
  */
 function setCategoryBackgroundColorForWorkStatus0() {
 	for (let i = 0; i < workStatus0Array.length; i++) {
@@ -213,7 +229,7 @@ function setCategoryBackgroundColorForWorkStatus0() {
 }
 
 /**
- * this function render all in progress cards.
+ * This function render all in progress cards.
  */
 function renderInProgressCards() {
 	document.getElementById('progressDiv').innerHTML = '';
@@ -226,7 +242,7 @@ function renderInProgressCards() {
 }
 
 /**
- * this function set the backgroundcolor of the catogory in the in progress task card.
+ * This function set the backgroundcolor of the catogory in the in progress task card.
  */
 function setCategoryBackgroundColorForWorkStatus1() {
 	for (let i = 0; i < workStatus1Array.length; i++) {
@@ -237,7 +253,7 @@ function setCategoryBackgroundColorForWorkStatus1() {
 }
 
 /**
- * this function render all awaiting feedback cards.
+ * This function render all awaiting feedback cards.
  */
 function renderAwaitingFeedbackCards() {
 	document.getElementById('awaitingDiv').innerHTML = '';
@@ -250,7 +266,7 @@ function renderAwaitingFeedbackCards() {
 }
 
 /**
- * this function set the backgroundcolor of the catogory in the awaiting feedback task card.
+ * This function set the backgroundcolor of the catogory in the awaiting feedback task card.
  */
 function setCategoryBackgroundColorForWorkStatus2() {
 	for (let i = 0; i < workStatus2Array.length; i++) {
@@ -261,7 +277,7 @@ function setCategoryBackgroundColorForWorkStatus2() {
 }
 
 /**
- * this function render all done cards.
+ * This function render all done cards.
  */
 function renderDoneCards() {
 	document.getElementById('doneDiv').innerHTML = '';
@@ -288,7 +304,7 @@ function changeHeightDropArea() {
 }
 
 /**
- * this function set the backgroundcolor of the catogory in the done task card.
+ * This function set the backgroundcolor of the catogory in the done task card.
  */
 function setCategoryBackgroundColorForWorkStatus3() {
 	for (let i = 0; i < workStatus3Array.length; i++) {
@@ -313,7 +329,7 @@ function showContributorsPrioIcon(taskIndex) {
 }
 
 /**
- * this function cache the id of the dragged element.
+ * This function cache the id of the dragged element.
  * @param {string} id - the id is the id of the dragged element.
  */
 function startDrag(id) {
@@ -321,7 +337,7 @@ function startDrag(id) {
 }
 
 /**
- * this function allows to drop an draggable element.
+ * This function allows to drop an draggable element.
  * @param {event} ev
  */
 function allowDrop(ev) {
@@ -358,7 +374,7 @@ async function moveToNewArea(area) {
 }
 
 /**
- * this function change the backgroundcolor of the droparea, if a dragged element is over it.
+ * This function change the backgroundcolor of the droparea, if a dragged element is over it.
  * @param {string} id - is the id of the element where the dragged element is over it.
  */
 function highlight(id) {
@@ -366,7 +382,7 @@ function highlight(id) {
 }
 
 /**
- * this function reset the backgroundcolor settings during hovering of thedragged element.
+ * This function reset the backgroundcolor settings during hovering of thedragged element.
  * @param {string} id - is the id of the element where the dragged element is dropped.
  */
 function removeHighlight(id) {

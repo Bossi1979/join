@@ -337,3 +337,28 @@ async function deleteUser(i) {
 	await saveTask();
 	setTimeout(initContacts, 100);
 }
+
+/**
+ * Checks if the given email address is already taken by another user.
+ *
+ * @param {HTMLElement} newEmailRequired - The element representing the error message for the email input.
+ * @param {string} name - The name value entered by the user.
+ * @param {string} email - The email value entered by the user.
+ * @param {string} phone - The phone number value entered by the user.
+ * @param {string} valueToCheck - The email value to be checked.
+ */
+function comparisonEmailHelp(newEmailRequired, name, email, phone, valueToCheck) {
+    check = 0;
+    for (let i = 0; i < allUsers.length; i++) {
+        let testValue = allUsers[i].email;
+        if (testValue === valueToCheck) {
+            check = 1;
+            break;
+        }
+    }
+    if (check == 1) {
+        newEmailRequired.classList.remove('d-none');
+        newEmailRequired.classList.add('requiredOn');
+        newEmailRequired.innerHTML = `This email address is not available!!`;
+    } else calculateNewAllUserArray(name, email, phone);
+}

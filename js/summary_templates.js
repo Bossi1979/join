@@ -1,3 +1,15 @@
+/**
+ * Generates an HTML string for the summary section of the Kanban board project management tool.
+ *
+ * @param {number} numberInBoard - The number of tasks currently in the board.
+ * @param {number} numberToDo - The number of tasks to do.
+ * @param {number} numberInProgress - The number of tasks in progress.
+ * @param {number} numberAwaitingFeedback - The number of tasks awaiting feedback.
+ * @param {number} numberDone - The number of tasks that are done.
+ * @param {number} numberUrgent - The number of urgent tasks.
+ * @param {string} nextDueDate - The date of the upcoming deadline.
+ * @returns {string} An HTML string for the summary section of the Kanban board project management tool.
+ */
 function generateSummaryHtml(numberInBoard, numberToDo, numberInProgress, numberAwaitingFeedback, numberDone, numberUrgent, nextDueDate) {
 	return /*html*/ `
 	<div class="summaryContainer">

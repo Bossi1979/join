@@ -43,107 +43,6 @@ async function renderSubtaskHtml(taskIndex) {
 }
 
 /**
- * It renders a popup window with a form to edit a task.
- * @param taskIndex - the index of the task in the array of tasks
- */
-async function renderEditTaskCardHtml(taskIndex) {
-    document.getElementById('boardPopup').innerHTML = '';
-    document.getElementById('boardPopup').innerHTML = /*html*/ `
-        <div class='boardTaskCardPopup' onclick='stopClose(event)'>
-        <img class='close_logo' src='./assets/img/close_logo.png' onclick='disablePopupWindow()'>
-            <div class='boardTaskCardInnerContainer'>
-
-                <div class='boardEditTitleContainer'>
-                    <span>Title</span>
-                    <input type='text' placeholder='Enter a title' id='boardEditTitle'>
-                    <span class="requiredText" id="titleEditReq">This field is required</span>
-                </div>
-                <div class='boardEditDescriptionContainer'>
-                    <span>Descripten</span>
-                    <textarea name='Description'  cols='30' rows='10' placeholder='Enter Descriptiom' id='boardEditDecription'></textarea>
-                    <span class="requiredText" id="descEditReq">This field is required</span>
-                </div>
-                <div class='boardEditDateContainer'>
-                    <span>Due Date</span>
-                    <input type='date' id='boardEditDueDate'>
-                </div>
-
-                <div class='editTaskCardPrio'>
-                    <h3>Prio</h3>
-                    <div class='editTaskCardPrioBtn'>
-                        <div class='addTaskUrgent' id='addTaskUrgent' onclick='addPrio(0); prioStatusChange(0)'>
-                            <span id='addTaskUrgentSpan'>Urgent</span>
-                            <img id='addTaskUrgentImg' src='./assets/img/urgent_arrows.png'>
-                        </div>
-                        <div class='addTaskMedium' id='addTaskMedium' onclick='addPrio(1); prioStatusChange(1)'>
-                            <span id='addTaskMediumSpan'>Medium</span>
-                            <img id='addTaskMediumImg' src='./assets/img/prio_medium.png'>
-                        </div>
-                        <div class='addTaskLow' id='addTaskLow' onclick='addPrio(2); prioStatusChange(2)'>
-                            <span id='addTaskLowSpan'>Low</span>
-                            <img id='addTaskLowImg' src='./assets/img/prio_low.png'>
-                        </div>
-                    </div>
-                    <span class='requiredText' id='titleReq'>This field is required</span>
-                </div>
-                    <!-- addTaskAssignedBox -->
-                <div class='boardAddTaskAssignedBox' id='addTaskAssignedBox'>
-                        <h3>Assigned to</h3>
-                        <button id='addTaskAssignedButton' onclick='enableDisableAssignList()'>
-                        <input
-                                disabled
-                                onclick='doNotCloseOnClick(event)'
-                                id='selectedAssign'
-                                name='selectedAssign'
-                                class='inputselectedAssign'
-                                placeholder='Select contacts to assign'
-                                autocomplete='off'
-                            />
-                    
-                        <div
-                        id='assignToCancelConfirmImgContainer'
-                        class='assignToCancelConfirmImgContainer d-none'
-                        >
-                            <img
-                            onclick='assignBoxBackToDefaultMode(), enableAssignList()'
-                            class='assignToCancelIcon'
-                            src='assets/img/cancel-black.png'
-                            alt='cancel'
-                            />
-                            <img class='assignToDeviderIcon' src='assets/img/bnt_divider.png' />
-                            <img
-                            onclick='frontEndDeveloper()'
-                            class='assignToCheckIcon'
-                            src='assets/img/akar-icons_check.png'
-                            alt='confirm'
-                            />
-                        </div>
-                        <img id='assignDropDownImg' src='assets/img/Vector 2.png' class='dropdownImg' />
-                        </button>
-                        <span id='assignReq'>This field is required</span>
-                        <div id='badgesTaskForce' class='badgesTaskForce'></div>
-                        <ul class='addTaskAssignList listD-none' id='dropdown2'>
-
-                        <li onclick='assigendContactEmail()' class='inviteNewContacts'>
-                            Invite new contacts<img
-                                class='assignInviteNewContactImage'
-                                src='assets/img/assigned_inviteNewContact.png'
-                                alt=''
-                            />
-                        </li>
-                    </div>
-                
-            </div>
-            <div class="btnsContainerboardTaskCardPopup">
-                    <button class='editTaskOkBtn' onclick='getTaskChanges(${taskIndex})'>Ok <img src='./assets/img/akar-icons_check_white.png' ></button>
-                    <button class='deleteButton d-none' id='deleteButton' onclick='deleteButton(${taskIndex})'> 
-                        Delete <img src='./assets/img/akar-icons_check_white.png' >
-                    </button>
-                </div>    
-        </div>`;
-}
-
-/**
  * this function returns the popup Menu html string
  * @returns - Board popup Menu html string.
  */
@@ -181,13 +80,11 @@ function renderAddTaskPopupHtml(workflow) {
                     </form>
                     <span class='requiredText' id='titleReq'>This field is required</span>
                 </div>
-
                 <div class='addTaskAddDescriptenBox'>
                     <h3>Descripten</h3>
                     <textarea form='formDesc' type='text' placeholder='Enter Descripten' id='addTaskDescripten'  required minlength='5'></textarea>
                     <span class='requiredText' id='descReq'>This field is required</span>
                 </div>
-
                 <div class='addTaskAddCategoryBox'>
                     <h3>Category</h3>
                     <button onclick=enableDisableCatList() id='selectedCat'>
@@ -201,8 +98,7 @@ function renderAddTaskPopupHtml(workflow) {
                         <img src='./assets/img/Vector 2.png' class='dropdownImg' id='dropdownImg'>
                     </button>
                     <span class='listD-none requiredText' id='catReq'>This field is required</span>
-                    <ul class='addTaskCatList listD-none' id='CatListDropdown'>
-                        
+                    <ul class='addTaskCatList listD-none' id='CatListDropdown'>   
                     </ul>
                     <div class='addTaskAddCategoryColor listD-none' id='colorSelection'>
                         <div class='color0' id='color0Div' onclick='addColorToCat(0)'></div>
@@ -213,48 +109,28 @@ function renderAddTaskPopupHtml(workflow) {
                         <div class='color5' id='color5Div' onclick='addColorToCat(5)'></div>
                     </div>
                 </div>
-
                 <div class='addTaskAssignedBox' id='addTaskAssignedBox'>
 			        <h3>Assigned to</h3>
 			        <button id='addTaskAssignedButton' onclick='enableDisableAssignList()'>
                     <input disabled onclick='doNotCloseOnClick(event)' id='selectedAssign' name='selectedAssign' class='inputselectedAssign' placeholder='Select contacts to assign' autocomplete='off'/>
-				
                     <div id='assignToCancelConfirmImgContainer' class='assignToCancelConfirmImgContainer d-none'>
-                        <img
-                        onclick='assignBoxBackToDefaultMode(), enableAssignList()'
-                        class='assignToCancelIcon'
-                        src='assets/img/cancel-black.png'
-                        alt='cancel'
-                        />
+                        <img onclick='assignBoxBackToDefaultMode(), enableAssignList()' class='assignToCancelIcon' src='assets/img/cancel-black.png' alt='cancel'/>
                         <img class='assignToDeviderIcon' src='assets/img/bnt_divider.png' />
-                        <img
-                        onclick='frontEndDeveloper()'
-                        class='assignToCheckIcon'
-                        src='assets/img/akar-icons_check.png'
-                        alt='confirm'
-                        />
+                        <img onclick='frontEndDeveloper()'class='assignToCheckIcon' src='assets/img/akar-icons_check.png' alt='confirm'/>
                     </div>
                     <img id='assignDropDownImg' src='assets/img/Vector 2.png' class='dropdownImg' />
                     </button>
                     <span id='assignReq'>This field is required</span>
                     <div id='badgesTaskForce' class='badgesTaskForce'></div>
                     <ul class='addTaskAssignList listD-none' id='dropdown2'>
-
                     <li onclick='assigendContactEmail()' class='inviteNewContacts'>
-                        Invite new contacts<img
-                            class='assignInviteNewContactImage'
-                            src='assets/img/assigned_inviteNewContact.png'
-                            alt=''
-                        />
+                        Invite new contacts<img class='assignInviteNewContactImage' src='assets/img/assigned_inviteNewContact.png'/>
                     </li>
                 </div>
-            
-
             </div>
             <div class='boardAddTaskDividerBoard'>
 
             </div>
-
             <div class='boardAddTaskRightContainer alignToBoard' id='boardAddTaskRightContainer'>
                 <div class='addTaskDate'>
                     <h3>Due date</h3>
@@ -290,15 +166,12 @@ function renderAddTaskPopupHtml(workflow) {
                             <img src='./assets/img/new_cat_cancel.png' onclick='resetSubtaskInput()'>
                             <img src='./assets/img/bnt_divider.png' class='btnDivider'>
                             <img src='./assets/img/akar-icons_check.png' onclick='addSubtask()'>
-                        </div>
-                        
+                        </div>   
                     </div>
-                    
                     <div class='addTaskCheckbox' id='subtaskCheckboxes'>
         
                     </div>   
                 </div>
-
             </div>
         </div>
         <div class='boardtaskAddedToBoard' id='taskCreatedIndication'>
@@ -316,7 +189,6 @@ function renderAddTaskPopupHtml(workflow) {
 	<div class="addTaskHeadlineDiv">
 		<h2 class="addTHeadline">Add Task</h2>
 	</div>
-
 	<div class="mainAddTaskContainer mainAddTaskContainerContacts ">
 	<div class="taskAddedToBoard" id="taskCreatedIndication">
 				<div class="taskAddedToBoardContainer">
@@ -325,7 +197,6 @@ function renderAddTaskPopupHtml(workflow) {
 				</div>
 			</div>
 		<div class="addTaskAddTitleContainer">
-		
 			<div class="addTaskAddTitleBox">
 				<h3 class="subTitleAddTask">Title</h3>
 				<form class="formAddTaskTitle" onsubmit="goToDescripten(); return false">
@@ -365,7 +236,6 @@ function renderAddTaskPopupHtml(workflow) {
 				<h3 class="subTitleAddTask">Assigned to</h3>
 				<button id="addTaskAssignedButton" onclick="enableDisableAssignList()" class="addTaskResponsiv">
 					<input disabled onclick="doNotCloseOnClick(event)" id="selectedAssign" name="selectedAssign" class="inputselectedAssign" placeholder="Select contacts to assign" autocomplete="off" />
-
 					<div id="assignToCancelConfirmImgContainer" class="assignToCancelConfirmImgContainer d-none">
 						<img onclick="assignBoxBackToDefaultMode(), enableAssignList()" class="assignToCancelIcon" src="assets/img/cancel-black.png" alt="cancel" />
 						<img class="assignToDeviderIcon" src="assets/img/bnt_divider.png" />
@@ -386,7 +256,6 @@ function renderAddTaskPopupHtml(workflow) {
 				<input required type="date" id="dueDate" min="2023-01-01" class="addTaskResponsiv" />
 				<span class="requiredText" id="dateReq">This field is required</span>
 			</div>
-
 			<div class="addTaskPrio">
 				<h3 class="subTitleAddTask">Prio</h3>
 				<div class="addTaskPrioIcons" id="addTaskPrioIcons">
@@ -405,7 +274,6 @@ function renderAddTaskPopupHtml(workflow) {
 				</div>
                 <span class='requiredText' id='prioReq'>This field is required</span>
 			</div>
-
 			<div class="subtask">
 				<h3 class="subTitleAddTask">Subtask</h3>
 				<div class="inputDiv addTaskResponsiv">
@@ -419,7 +287,6 @@ function renderAddTaskPopupHtml(workflow) {
 						<img src="./assets/img/akar-icons_check.png" onclick="addSubtask()" />
 					</div>
 				</div>
-
 				<div class="addTaskCheckbox" id="subtaskCheckboxes"></div>
 			</div>
 			<div class="addTaskBtnOuterContainerContacts" id="addTaskBtnOuterContainer">
@@ -433,12 +300,9 @@ function renderAddTaskPopupHtml(workflow) {
 					<img src="./assets/img/createb.png" />
 				</button>
 			</div>
-		</div>
-			
-		</div>
-		
+		</div>	
+		</div>	
 	</div>
-
 </div>
     </div>
         `;
@@ -479,18 +343,14 @@ function renderPopupTaskCardHtml(taskIndex) {
                         <img src='./assets/img/urgent_white.png' id='cardPrioImg'>
                     </div>
                 </div>
-
                 <span class='assigned'>Assigned To:</span>                
-        
                 <div class='members' id='members'></div>            
-            
                 <div class='boardSubtasksTitleDiv'>
                     <span class='boardSubtaskTitle'>Subtasks:</span>    
                 </div >
                 <div class='boardSubtasksDiv' id='subtaskListTaskCard'></div>
                 
                 </div>
-
                 <div class='detailBtnDiv'>
                     <div class='moveBtnMobil' id='moveBtnMobil'></div>
                     <div class='editButton' onclick='openEditTaskCard(${taskIndex})'>
@@ -499,9 +359,7 @@ function renderPopupTaskCardHtml(taskIndex) {
                 </div>
                 
         </div>
-        
         `;
-
     setTaskCardPopupCatColor(taskIndex);
     setTaskCardPopupPrioBackground(taskIndex);
     renderSubtask(taskIndex);

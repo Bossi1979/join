@@ -1,6 +1,8 @@
 let sliderMenuShown = false;
 
-// responsiv Slider menu functions
+/**
+ * Enables or Disable the slider menue.
+ */
 function enableDisableSliderMenu() {
 	let sliderMenu = document.querySelector('.sliderMenu');
 	sliderMenu.classList.toggle('showSliderMenu');

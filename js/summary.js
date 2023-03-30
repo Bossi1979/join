@@ -1,16 +1,13 @@
 let greetingOnce = false;
 let noDueDate = 'No due date';
-
 let loggedInUserIndex;
 let emailAddressLoggedUser;
-
 let numberInBoard = 0;
 let numberToDo = 0;
 let numberInProgress = 0;
 let numberAwaitingFeedback = 0;
 let numberDone = 0;
 let numberUrgent = 0;
-
 let allUpcomingTasks = [];
 let tasksInBoard = [];
 let toDoTasks = [];
@@ -99,10 +96,6 @@ async function renderSummary() {
 	greetUserInMobileUI();
 }
 
-/*================ 
-GREETING FUNCTIONS
-=================*/
-
 /**
  * Depending on the time greet user being logged in
  */
@@ -110,7 +103,6 @@ function greetUser() {
 	const currentTime = new Date();
 	const hours = currentTime.getHours();
 	const greeting = getGreeting(hours);
-
 	setInnerHtmlById('greetUser', greeting);
 	setInnerHtmlById('greetingMobile', greeting);
 }
@@ -135,7 +127,6 @@ function greetUserInMobileUI() {
 
 /**
  * This function returns the name of the currently logged-in user.
- * @returns - 
  */
 function userName() {
 	return allUsers[loggedUser[0]].name;
@@ -156,13 +147,8 @@ function greetingAnimationSmallerScreens() {
 	}
 }
 
-/* =================
-MAIN SUMMARY SECTION
-====================*/
-
 /**
- * This function loads the logged in user's array,
- * gets the index of the logged in user, gets the email
+ * This function loads the logged in user's array, gets the index of the logged in user, gets the email
  * address of the logged in user, and updates the summary.
  */
 async function loadAmountsForSummary() {
@@ -173,8 +159,7 @@ async function loadAmountsForSummary() {
 }
 
 /**
- * It takes the loggedUserAtString from localStorage,
- * parses it into a JSON object,
+ * It takes the loggedUserAtString from localStorage, parses it into a JSON object,
  * and then logs the id of the object to the console.
  */
 function loadLoggedInUserArray() {
@@ -210,38 +195,38 @@ function allUserTasks(tasks) {
 }
 
 /**
- *
- * @param {object} tasks
- * @param {number} status
+ * Filters an array of tasks by their workflow status.
+ * @param {Array} taskArray - The array of tasks to filter.
+ * @param {string} status - The workflow status to filter by.
  * @param {string} emailAddressLoggedUser
- * @returns array of tasks of priority x of the logged in user
+ * @return {Array} - An array of tasks that have the specified workflow status.
  */
 function filterTasks(taskArray, status) {
 	return taskArray.filter((task) => task.workFlowStatus === status);
 }
 
 /**
- *
- * @param {object} tasks
- * @param {string} priority
- * @param {string} emailAddressLoggedUser
- * @returns
+ * Returns an array of tasks with the specified priority level.
+ * @param {Array} taskArray - An array of task objects.
+ * @param {string} priority - The priority level to filter the tasks by.
+ * @returns {Array} An array of task objects with the specified priority level
  */
 function filterTasksPriority(taskArray, priority) {
 	return taskArray.filter((task) => task.prio === priority);
 }
 
 /**
- *
- * @param {object} person
- * @returns {boolean} true if email of person matches email of logged in user
+ * Checks if the email address of a person matches the email address of the logged in user.
+ * @param {object} person - The person object to check.
+ * @returns {boolean} - Returns true if the email address of the person matches the email address of the logged in user, false otherwise.
  */
 function emailMatch(person) {
 	return person.email === emailAddressLoggedUser;
 }
 
 /**
- * This function asynchronously calls getTasks() and getAmountTasks() functions to retrieve all the necessary task data for the overview page.
+ * This function asynchronously calls getTasks() and getAmountTasks() functions to retrieve all the necessary task data for 
+ * the overview page.
  */
 async function getAllValuesForOverview() {
 	getTasks();

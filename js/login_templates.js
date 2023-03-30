@@ -1,6 +1,7 @@
 /**
  * This function removes the class 'requiredOn' from the requiredEmail and requiredPassword elements,
  * and sets the innerHTML of both elements to 'This field is required'.
+ * 
  * @param email - the email input field
  * @param password - the password input field
  * @param requiredEmail - The element that will display the error message for the email field.
@@ -18,6 +19,7 @@ function resetRequiredLine(email, password, requiredEmail, requiredPassword) {
  * required email message, if it is, check if the password is empty, if it is, show the required
  * password message, if it isn't, check if the required email and password messages are not showing, if
  * they aren't, run the userLogin function.
+ * 
  * @param email - the email input field
  * @param password - the password input field
  * @param requiredEmail - the element that will be shown if the email is not valid
@@ -39,6 +41,7 @@ function calculateCheckCorrectInput(email, password, requiredEmail, requiredPass
 /**
  * If the user doesn't exist, then add the class 'requiredOn' to the email and password fields, and add
  * the text 'No user available. please  Sign up!!' to the email and password fields.
+ * 
  * @param requiredEmailLogin - the element that will display the error message
  * @param requiredPasswordLogin - the password input field
  */
@@ -51,6 +54,7 @@ function pleaseRegister(requiredEmailLogin, requiredPasswordLogin) {
 
 /**
  * If the email and password match, then the user is logged in.
+ * 
  * @param email - the email that the user entered
  * @param password - the password the user entered
  * @param requiredEmailLogin - is the element that will display the error message if the email is not
@@ -62,8 +66,7 @@ function statusOK(email, password, requiredEmailLogin, requiredPasswordLogin) {
 	let loginStatus = false;
 	let userId;
 	for (let i = 0; i < allUsers.length; i++) {
-		let emailData = allUsers[i]['email'];
-		if (emailData == email) {
+		if (allUsers[i]['email'] == email) {
 			if (allUsers[i]['password'] == password) {
 				loginStatus = true;
 				userId = i;
@@ -71,15 +74,25 @@ function statusOK(email, password, requiredEmailLogin, requiredPasswordLogin) {
 			}
 		}
 	}
-	if (loginStatus == true) {
-		rememberMe(email, password, userId);
-	} else {
-		requiredEmailLogin.classList.add('requiredOn');
-		requiredEmailLogin.innerHTML = `Email or Password do not match!!`;
-		requiredPasswordLogin.classList.add('requiredOn');
-		requiredPasswordLogin.innerHTML = `Email or Password do not match!!`;
-	}
+	if (loginStatus == true) rememberMe(email, password, userId);
+	else loginFailed(requiredEmailLogin, requiredPasswordLogin);
 }
+
+/**
+ * Set the indication if the login failed.
+ * 
+ * @param requiredEmailLogin - Is the element that will display the error message 
+ * if the email is not found in the database.
+ * @param requiredPasswordLogin - is the element that will display the error message if the password is
+ * incorrect. 
+ */
+function loginFailed(requiredEmailLogin, requiredPasswordLogin) {
+	requiredEmailLogin.classList.add('requiredOn');
+	requiredEmailLogin.innerHTML = `Email or Password do not match!!`;
+	requiredPasswordLogin.classList.add('requiredOn');
+	requiredPasswordLogin.innerHTML = `Email or Password do not match!!`;
+}
+
 
 /**
  * It checks if the email and password entered by the user is in the local storage. If it is, it

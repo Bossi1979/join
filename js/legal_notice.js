@@ -1,3 +1,7 @@
+
+/**
+ * Init legal notice.
+ */
 async function initLegalNotice() {
     await includeHTML();
     await renderLegalNotice();
@@ -7,7 +11,10 @@ async function initLegalNotice() {
     document.querySelector('.sliderMenu').classList.remove('showSliderMenu');
 }
 
-function renderLegalNotice() {
+/**
+ * Render legal notice html
+ */
+async function renderLegalNotice() {
     document.getElementById('content').innerHTML = '';
     document.getElementById('content').innerHTML += /*html*/ `
         <div class="legal-wrapper">

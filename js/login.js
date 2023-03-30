@@ -64,11 +64,8 @@ async function userLogin(email, password) {
 	await loadTask();
 	let requiredEmailLogin = document.getElementById('requiredEmailLogin');
 	let requiredPasswordLogin = document.getElementById('requiredPasswordLogin');
-	if (allUsers.length == null) {
-		pleaseRegister(requiredEmailLogin, requiredPasswordLogin);
-	} else {
-		statusOK(email, password, requiredEmailLogin, requiredPasswordLogin);
-	}
+	if (allUsers.length == null) pleaseRegister(requiredEmailLogin, requiredPasswordLogin);
+	else statusOK(email, password, requiredEmailLogin, requiredPasswordLogin);
 }
 
 /**
@@ -81,9 +78,7 @@ async function userLogin(email, password) {
 //  remember me checkbox check
 function rememberMe(email, password, userId) {
 	let checkbox = document.getElementById('checkbox');
-	if (checkbox.checked) {
-		rememberUserExisting(email, password);
-	}
+	if (checkbox.checked) rememberUserExisting(email, password);
 	loggedUser = [];
 	loggedUser.push(userId);
 	let loggedUserAsString = JSON.stringify(loggedUser);
@@ -177,11 +172,8 @@ function sendMailButton() {
 	document.getElementById('requiredEmailForgot').classList.remove('requiredOn');
 	document.getElementById('requiredEmailForgot').innerHTML = `This field is required`;
 	let inputForgotValue = document.getElementById('inputForgot').value;
-	if (emailTest.test(inputForgotValue)) {
-		inputForgotValueOk(inputForgotValue);
-	} else {
-		document.getElementById('requiredEmailForgot').classList.add('requiredOn');
-	}
+	if (emailTest.test(inputForgotValue)) inputForgotValueOk(inputForgotValue);
+	else document.getElementById('requiredEmailForgot').classList.add('requiredOn');
 }
 
 /**
@@ -197,9 +189,7 @@ function inputForgotValueOk(inputForgotValue) {
 			preparationShowPasswordResetCard(i);
 			setTimeout(showPasswordResetCard, 2000);
 			break;
-		} else {
-			comparisonFailed();
-		}
+		} else comparisonFailed();
 	}
 }
 

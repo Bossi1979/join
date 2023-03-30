@@ -38,7 +38,6 @@ function boardHtml() {
 						<div id="toDoDiv"></div>
 					</div>
 				</div>
-
 				<div class="columnBoard">
 					<div class="inProgressAreaHeader">
 						<span>In progress</span>
@@ -48,7 +47,6 @@ function boardHtml() {
 						<div id="progressDiv"></div>
 					</div>
 				</div>
-
 				<div class="columnBoard">
 					<div class="awaitingFeedbackAreaHeader">
 						<span>Awaiting Feedback</span>
@@ -58,7 +56,6 @@ function boardHtml() {
 						<div id="awaitingDiv"></div>
 					</div>
 				</div>
-
 				<div class="columnBoard">
 					<div class="doneAreaHeader">
 						<span>Done</span>
@@ -281,3 +278,89 @@ function doneHtml(arrayIndex) {
             </div>
         </div>`;
 }
+
+/**
+ * Renders the HTML code for a button to move tasks on mobile devices.
+ * @param {string} buttonText - The text to be displayed on the button.
+ * @param {string} newTaskStatus - The new status of the task being postponed.
+ * @param {number} taskIndex - The index of the task being moved.
+ */
+function renderMoveBtnMobilHtml(buttonText, newTaskStatus, taskIndex) {
+	document.getElementById('moveBtnMobil').innerHTML += /*html*/ `
+    <button onclick='moveMobilTaskTo(${taskIndex}, ${newTaskStatus})'>
+        ${buttonText}
+    </button>`;
+}
+
+/**
+ * It renders a popup window with a form to edit a task.
+ * @param taskIndex - the index of the task in the array of tasks
+ */
+async function renderEditTaskCardHtml(taskIndex) {
+	document.getElementById('boardPopup').innerHTML = '';
+	document.getElementById('boardPopup').innerHTML = /*html*/ `
+        <div class='boardTaskCardPopup' onclick='stopClose(event)'>
+        <img class='close_logo' src='./assets/img/close_logo.png' onclick='disablePopupWindow()'>
+            <div class='boardTaskCardInnerContainer'>
+                <div class='boardEditTitleContainer'>
+                    <span>Title</span>
+                    <input type='text' placeholder='Enter a title' id='boardEditTitle'>
+                    <span class="requiredText" id="titleEditReq">This field is required</span>
+                </div>
+                <div class='boardEditDescriptionContainer'>
+                    <span>Descripten</span>
+                    <textarea name='Description'  cols='30' rows='10' placeholder='Enter Descriptiom' id='boardEditDecription'></textarea>
+                    <span class="requiredText" id="descEditReq">This field is required</span>
+                </div>
+                <div class='boardEditDateContainer'>
+                    <span>Due Date</span>
+                    <input type='date' id='boardEditDueDate'>
+                </div>
+                <div class='editTaskCardPrio'>
+                    <h3>Prio</h3>
+                    <div class='editTaskCardPrioBtn'>
+                        <div class='addTaskUrgent' id='addTaskUrgent' onclick='addPrio(0); prioStatusChange(0)'>
+                            <span id='addTaskUrgentSpan'>Urgent</span>
+                            <img id='addTaskUrgentImg' src='./assets/img/urgent_arrows.png'>
+                        </div>
+                        <div class='addTaskMedium' id='addTaskMedium' onclick='addPrio(1); prioStatusChange(1)'>
+                            <span id='addTaskMediumSpan'>Medium</span>
+                            <img id='addTaskMediumImg' src='./assets/img/prio_medium.png'>
+                        </div>
+                        <div class='addTaskLow' id='addTaskLow' onclick='addPrio(2); prioStatusChange(2)'>
+                            <span id='addTaskLowSpan'>Low</span>
+                            <img id='addTaskLowImg' src='./assets/img/prio_low.png'>
+                        </div>
+                    </div>
+                    <span class='requiredText' id='titleReq'>This field is required</span>
+                </div>
+                <div class='boardAddTaskAssignedBox' id='addTaskAssignedBox'>
+                        <h3>Assigned to</h3>
+                        <button id='addTaskAssignedButton' onclick='enableDisableAssignList()'>
+                        <input disabled onclick='doNotCloseOnClick(event)' id='selectedAssign' name='selectedAssign' class='inputselectedAssign' placeholder='Select contacts to assign' autocomplete='off'/>
+                        <div id='assignToCancelConfirmImgContainer' class='assignToCancelConfirmImgContainer d-none'>
+                            <img onclick='assignBoxBackToDefaultMode(), enableAssignList()' class='assignToCancelIcon' src='assets/img/cancel-black.png' alt='cancel'/>
+                            <img class='assignToDeviderIcon' src='assets/img/bnt_divider.png' />
+                            <img onclick='frontEndDeveloper()' class='assignToCheckIcon' src='assets/img/akar-icons_check.png' alt='confirm'/>
+                        </div>
+                        <img id='assignDropDownImg' src='assets/img/Vector 2.png' class='dropdownImg' />
+                        </button>
+                        <span id='assignReq'>This field is required</span>
+                        <div id='badgesTaskForce' class='badgesTaskForce'></div>
+                        <ul class='addTaskAssignList listD-none' id='dropdown2'>
+                        <li onclick='assigendContactEmail()' class='inviteNewContacts'>
+                            Invite new contacts<img class='assignInviteNewContactImage' src='assets/img/assigned_inviteNewContact.png'/>
+                        </li>
+                    </div>
+            </div>
+            <div class="btnsContainerboardTaskCardPopup">
+                    <button class='editTaskOkBtn' onclick='getTaskChanges(${taskIndex})'>Ok <img src='./assets/img/akar-icons_check_white.png' ></button>
+                    <button class='deleteButton d-none' id='deleteButton' onclick='deleteButton(${taskIndex})'> 
+                        Delete <img src='./assets/img/akar-icons_check_white.png' >
+                    </button>
+                </div>    
+        </div>`;
+}
+
+
+

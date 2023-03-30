@@ -229,3 +229,66 @@ function generateBadgesTaskForceHtml(memberOfTaskForce, name, initials, badgesIn
 		</div>
 		`;
 }
+
+
+/**
+ * This function return the html code for the category list if backgroundcolor is available.
+ * 
+ * @param {string} categoryName - is the category name as string.
+ * @param {number} categoryColor - is a number that is related to the category backgroundcolor.
+ * @param {number} i - is the index number of the category array.
+ * @returns - the html string for the category list if backgroundcolor is available.
+ */
+function dropdownCategoryListHtml(categoryName, categoryColor, i) {
+	return /*html*/ `
+        <li onclick='selectCategory(${i})'>
+			${categoryName}
+			<div  class='color${categoryColor} addTaskColorDiv'></div>
+        </li>`;
+}
+
+/**
+ * This function return the html code for the category list if backgroundcolor is not available.
+ * 
+ * @param {string} categoryName - is the category name as string.
+ * @param {number} categoryColor - is a number that is related to the category backgroundcolor.
+ * @param {number} i - is the index number of the category array.
+ * @returns - the html string for the category list if backgroundcolor is not available.
+ */
+function dropdownCategoryListHtml1(categoryName, i) {
+	return /*html*/ `
+        <li onclick='selectCategory(${i})'>
+            ${categoryName}
+        </li>`;
+}
+
+/**
+ * Clears the selected category and resets the category dropdown to its default state
+ */
+function clearSelectedCategory() {
+	document.getElementById('selectedCat').innerHTML = /*html*/`
+	  <input disabled id='selectedCatInput' placeholder='Select task category' autocomplete='off'>
+	  <span id='sColor'></span>
+	  <div class='newCategoryImgDiv d-none' id='addTaskNewCatBtn'>
+		<img src="./assets/img/new_cat_cancel.png">
+		<img src="./assets/img/bnt_divider.png" class='btnDivider'>
+		<img src="./assets/img/akar-icons_check.png">
+	  </div>
+	  <img src="./assets/img/Vector 2.png" class='dropdownImg' id='dropdownImg'>`;
+}
+
+/**
+* Updates the HTML with the current subtask list.
+* Loops through the subTaskArray and generates HTML for each subtask, including a checkbox, title, and delete button.
+*/
+async function subtaskListHtml() {
+	document.getElementById('subtaskCheckboxes').innerHTML = '';
+	for (let i = 0; i < subTaskArray.length; i++) {
+		let subTaskTitle = subTaskArray[i]['subtaskText'];
+		document.getElementById('subtaskCheckboxes').innerHTML += /*html*/ `
+        <div>
+            <input type="checkbox" id='subtask${i}' onclick='subtaskSelectionChange(${i})'>
+            <span>${subTaskTitle}</span> <img onclick='deleteSubtask(${i})' src="assets/img/bin.png" alt="" style="height: 16px; width: 16px; margin-left: 8px;">
+        </div>`;
+	}
+}
