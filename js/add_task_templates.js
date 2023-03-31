@@ -287,7 +287,7 @@ async function subtaskListHtml() {
 		let subTaskTitle = subTaskArray[i]['subtaskText'];
 		document.getElementById('subtaskCheckboxes').innerHTML += /*html*/ `
         <div>
-            <input type="checkbox" id='subtask${i}' onclick='subtaskSelectionChange(${i})'>
+            <input type="checkbox" id='subtask${i}' onclick='subtaskSelectionChange(${i})' class='d-none'>
             <span>${subTaskTitle}</span> <img onclick='deleteSubtask(${i})' src="assets/img/bin.png" alt="" style="height: 16px; width: 16px; margin-left: 8px;">
         </div>`;
 	}

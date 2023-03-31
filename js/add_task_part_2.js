@@ -220,7 +220,7 @@ function clearFormularData() {
 	clearSubtasks();
 	clearValidationMessages();
 	resetAssignToList();
-	emptySubTaskArray();
+	// emptySubTaskArray();
 	renderSubtasks();
 	closeCatList();
 	clearTaskForce();
@@ -290,7 +290,6 @@ async function minOneSubtask() {
 	}
 }
 
-
 /**
  * Checks if there are no selected subtasks, alerts the user, and returns true.
  * 
@@ -304,7 +303,7 @@ function noSubtaskSelected() {
  * Sets the selectedSubtasks array to a default subtask object.
  */
 function setDefaultSubtask() {
-	selectedSubtasks = [{ subtaskText: 'Subtask', subtaskStatus: true }];
+	selectedSubtasks = [{ subtaskText: 'Ready for Feedback ?', subtaskStatus: true }];
 }
 
 /**

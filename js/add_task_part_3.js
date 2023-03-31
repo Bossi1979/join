@@ -160,7 +160,7 @@ function addSubtask() {
 * Adds a "Subtask" subtask to the subtaskArray and updates the UI.
 */
 function addSubtaskMain() {
-	let subTaskText = 'Subtask';
+	let subTaskText = 'Ready for Feedback ?';
 	subTaskArray = [];
 	subTaskInputLeave();
 	pushNewSubtaskDatatoArray(subTaskText);
