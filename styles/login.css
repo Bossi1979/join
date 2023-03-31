@@ -785,8 +785,6 @@ body {
 	cursor: pointer;
 }
 
-/* Email has been sent */
-
 .sentMassageDoneMaserContainerMob {
 	position: absolute;
 	left: 0;
@@ -1042,7 +1040,6 @@ body {
 }
 
 @media screen and (max-width: 1024px), (max-height: 900px) {
-	/* login */
 	.notAJoinUser {
 		right: 38px;
 	}
@@ -1107,8 +1104,6 @@ body {
 		height: 51px !important;
 	}
 
-	/* SignUp */
-
 	.signUpHeadline span {
 		font-size: 47px;
 	}
@@ -1141,8 +1136,6 @@ body {
 	.signupInputSignUp {
 		width: 100%;
 	}
-
-	/* forgot password */
 
 	.forgotResetMasterContainer {
 		width: 430px;
@@ -1216,7 +1209,6 @@ body {
 }
 
 @media screen and (max-width: 480px) {
-	/* login */
 
 	.logInLogoImgBlack {
 		position: absolute;
@@ -1248,8 +1240,6 @@ body {
 			z-index: 1000;
 		}
 	}
-
-	/* forgot password */
 
 	.innerContainerForgotPassword h1 {
 		font-size: 36px;

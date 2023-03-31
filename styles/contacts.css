@@ -210,7 +210,6 @@
 	position: absolute;
 	width: 193px;
 	height: 53px;
-	/* left: 1195px; */
 	right: 52px;
 	bottom: 64px;
 	background: #2a3647;
@@ -286,11 +285,9 @@
 }
 
 .show_contact_ellipse_5 {
-	/* position: absolute; */
 	width: 120px;
 	height: 120px;
 	left: 0px;
-	/* top: -30px; */
 	border-radius: 100%;
 	background: #ff7a00;
 	display: flex;
@@ -312,7 +309,6 @@
 }
 
 .showContact_Name_addTask h1 {
-	/* margin-left: 239px; */
 	width: 287px;
 	height: fit-content;
 	font-family: 'Inter';
@@ -329,7 +325,6 @@
 }
 
 .showContact_Name_addTask span {
-	/* margin-left: 239px; */
 	width: fit-content;
 	height: 27px;
 	font-family: 'Inter';
@@ -413,7 +408,6 @@
 	order: 1;
 	flex-grow: 0;
 	color: blue;
-	/* text-decoration: underline; */
 }
 
 .contactEmail a {
@@ -575,7 +569,6 @@
 	font-weight: 500;
 	font-size: 47px;
 	display: flex;
-	/* align-items: center; */
 	text-align: center;
 	color: #ffffff;
 }
@@ -632,7 +625,6 @@
 }
 
 .save span {
-	/* width: min-content; */
 	height: 25px;
 	font-family: 'Inter';
 	font-style: normal;
@@ -956,8 +948,6 @@
 	font-family: 'Inter';
 }
 
-/**************************/
-/* New- und Edit- Contact */
 @media (max-width: 1440px) {
 	.add_contact {
 		width: 1000px;
@@ -1026,10 +1016,6 @@
 	}
 }
 
-/**************************/
-
-/****************/
-/* Show Contact */
 @media (max-width: 1300px) {
 	.Frame_97 {
 		left: 0;
@@ -1158,7 +1144,6 @@
 }
 
 @media (max-width: 850px) {
-	/* 768*/
 
 	.Frame_97 {
 		margin-left: 0px;
@@ -1221,7 +1206,7 @@
 
 	.Frame_97 {
 		max-width: 100%;
-		height: calc(100% - 158px); /* 215px für eigentliches Gerät */
+		height: calc(100% - 158px);
 		background: #ffffff;
 		display: flex;
 	}
@@ -1318,16 +1303,8 @@
 		overflow: scroll;
 	}
 
-	/* .showContact {
-		top: 100px;
-	} */
-
 	.new_contact {
 		right: 16px;
 		bottom: 16px;
 	}
 }
-
-/****************/
-
-/****************/

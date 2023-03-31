@@ -141,10 +141,10 @@ function openEditContactsOf(arr, i) {
  * It opens a new contact form.
  */
 function openNewContact() {
-	if (guestLoggedIn) {
-		alert('Sorry, does not work with guest status!');
-		return;
-	}
+	// if (guestLoggedIn) {
+	// 	alert('Sorry, does not work with guest status!');
+	// 	return;
+	// }
 	document.getElementById('boardPopup').classList.remove('d-none');
 	document.getElementById('new_contact').classList.remove('d-none');
 	document.getElementById('new_contact').innerHTML = '';
@@ -237,7 +237,6 @@ function showContactList() {
  * If the user is not logged in as a guest, then run the addContactHelp function.
  */
 async function addContact() {
-	if (!guestLoggedIn) {
 		let name = document.getElementById('newUserName');
 		let email = document.getElementById('newUserEmail');
 		let phone = document.getElementById('newUserPhone');
@@ -245,7 +244,6 @@ async function addContact() {
 		let newEmailRequired = document.getElementById('newContentEmailRequired');
 		let newPhoneRequired = document.getElementById('newContentPhoneRequired');
 		addContactHelp(name, email, phone, newNameRequired, newEmailRequired, newPhoneRequired);
-	}
 }
 
 /**

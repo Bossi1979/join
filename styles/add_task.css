@@ -1207,7 +1207,6 @@
 	box-shadow: 0px 0px 4px rgba(0, 0, 0, 0.1);
 	border-radius: 10px;
 	flex: none;
-	/* order: 1; */
 	flex-grow: 0;
 }
 
@@ -1281,7 +1280,6 @@
 	padding: 0px;
 	gap: 8px;
 	width: 300px;
-	/* changed height by Bossi */
 	max-height: 116px;
 	flex: none;
 	order: 2;

@@ -1292,7 +1292,6 @@ boardSubheaders>* {
 	line-height: 120%;
 	color: #000000;
 	flex: none;
-	/* order: 1; */
 	flex-grow: 0;
 }
 
@@ -1390,7 +1389,6 @@ boardSubheaders>* {
 	border: 1px solid #d1d1d1;
 	border-radius: 10px;
 	flex: none;
-	/* order: 1; */
 	flex-grow: 0;
 	font-family: 'Inter';
 	font-style: normal;
@@ -1651,12 +1649,8 @@ boardSubheaders>* {
 
 
 .addTaskCheckboxBoard {
-	/* flex-direction: unset !important; */
 	max-width: 420px !important;
-	/* flex-wrap: wrap; */
 	height: fit-content !important;
-	/* overflow: hidden;
-	overflow-y: scroll; */
 	margin-bottom: 170px;
 	max-height: 143px;
     overflow-y: scroll;
@@ -1787,12 +1781,8 @@ boardSubheaders>* {
 	}
 
 	.addTaskCheckboxBoard {
-		/* flex-direction: unset !important; */
 		width: 420px !important;
-		/* flex-wrap: wrap; */
 		height: fit-content !important;
-		/* overflow: hidden;
-		overflow-y: scroll; */
 		margin-bottom: 170px;
 		max-height: unset;
 	}

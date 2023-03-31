@@ -17,7 +17,6 @@ body {
 	display: none !important;
 }
 
-/* forgot */
 .formForgot {
 	position: absolute;
 	height: 100%;
@@ -127,8 +126,6 @@ body {
 	cursor: pointer;
 }
 
-/* Email has been sent */
-
 .sentMassageDoneMaserContainerMob {
 	position: absolute;
 	left: 0;
@@ -176,7 +173,6 @@ body {
 	flex-grow: 0;
 }
 
-/* reset*/
 .formRestPassword {
 	position: absolute;
 	height: 100%;
