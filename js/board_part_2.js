@@ -39,7 +39,7 @@ function addTaskSelected(taskIndex) {
  * Disables a popup window that has been opened previously.
  */
 async function disablePopupWindow() {
-	if (boardAddTaskOpened()) closeBoardAddTaskPopup();
+	if (boardAddTaskOpened())closeBoardAddTaskPopup();
 	if (selectedMenuBtnId == 4) {
 	} else closeBoardTaskPopup();
 }
@@ -62,7 +62,7 @@ async function closeBoardTaskPopup() {
 	setTimeout(() => {
 		document.getElementById('boardPopup').classList.add('d-none');
 	}, 500);
-	searchAfterPopup();
+	
 }
 
 /**
@@ -82,6 +82,7 @@ async function renderAfterCloseTask() {
 	renderAllCards();
 	loadContributorsLetter();
 	coworkersToAssignTo = transferallUserData();
+	searchAfterPopup();
 }
 
 /**
@@ -310,6 +311,7 @@ async function saveEditTask(taskIndex, boardEditedTitle, boardEditedDescripten, 
 	await renderBoard();
 	await createWorkStatusArrays();
 	await renderAllCards();
+	await searchAfterPopup();
 }
 
 /**

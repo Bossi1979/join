@@ -357,7 +357,7 @@ function moveTo(area) {
 	if ((doneBarWidth == doneBarOuterWidth && workFlowStatusDraggedElement >= 1) || (workFlowStatusDraggedElement < 1 && area < 2) || area < workFlowStatusDraggedElement) {
 		moveToNewArea(area);
 	} else {
-		alert('Please finish all subtasks and to not skip a step.');
+		alert('Please complete all subtasks and only move the card one column further or back.');
 	}
 }
 

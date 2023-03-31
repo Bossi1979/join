@@ -62,6 +62,7 @@ function startSearch() {
  * Calls the desktop version of the search after popup function.
  */
 function searchAfterPopup() {
+	document.getElementById('searchField').value = searchTerm;
 	searchAfterPopupDesktop();
 }
 
@@ -112,6 +113,7 @@ function searchAfterPopupMobil() {
 async function renderBtnBySubtaskChange(taskIndex) {
 	await saveChangesDetailView();
 	renderMoveBtnMobil(taskIndex);
+	searchAfterPopup();
 }
 
 /**
@@ -121,6 +123,7 @@ async function saveChangesDetailView() {
 	await saveTask();
 	await createWorkStatusArrays();
 	renderAllCards();
+	searchAfterPopup();
 }
 
 /**
@@ -147,47 +150,6 @@ async function renderMoveBtnMobil(taskIndex) {
  */
 function closeBoardMobilDetailOverlay() {
 	document.getElementById('boardPopup').classList.add('d-none');
-}
-
-/**
- * Updates the move button in the mobile view of a task card after a change in the subtask(s) of the card.
- * Saves any changes made to the task card using the `saveChangesDetailView` function, and then calls the
- * `renderMoveBtnMobil` function to update the move button with the new available options based on the
- * current status of the card.
- *
- * @param {number} taskIndex - The index of the task card whose move button needs to be updated.
- */
-async function renderBtnBySubtaskChange(taskIndex) {
-	await saveChangesDetailView();
-	renderMoveBtnMobil(taskIndex);
-}
-
-/**
- * Saves the task, creates the work status arrays, and re-renders all cards.
- */
-async function saveChangesDetailView() {
-	await saveTask();
-	await createWorkStatusArrays();
-	renderAllCards();
-}
-
-/**
- * Renders move buttons on the mobile view of a task card, based on its current workFlowStatus.
- *
- * @param {number} taskIndex - The index of the task to render move buttons for.
- */
-async function renderMoveBtnMobil(taskIndex) {
-	document.getElementById('moveBtnMobil').innerHTML = '';
-	let workStatus = joinTaskArray[taskIndex]['workFlowStatus'];
-	let buttonArray = arrayMoveBtnText[workStatus]['btn'];
-	let forLoppEndValue = buttonArray.length;
-	let newStatusArray = arrayMoveBtnText[workStatus]['newStatus'];
-	if (workStatus >= 1 && workStatus < 3) forLoppEndValue = taskCardAllowMove(taskIndex);
-	for (let i = 0; i < forLoppEndValue; i++) {
-		let buttonText = buttonArray[i];
-		let newTaskStatus = newStatusArray[i];
-		renderMoveBtnMobilHtml(buttonText, newTaskStatus, taskIndex);
-	}
 }
 
 /**
@@ -285,6 +247,7 @@ function addTaskContactAutomaticResponisive() {
  */
 function trackThatAddTaskIsClose() {
 	addTaskOpen = false;
+	searchTerm ='';
 }
 
 /**
