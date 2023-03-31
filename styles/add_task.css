@@ -1281,7 +1281,8 @@
 	padding: 0px;
 	gap: 8px;
 	width: 300px;
-	height: fit-content;
+	/* changed height by Bossi */
+	max-height: 116px;
 	flex: none;
 	order: 2;
 	flex-grow: 0;

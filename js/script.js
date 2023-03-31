@@ -40,12 +40,13 @@ let menuSelectorStyles = [
 	}
 ];
 
-
 let colorUserIndex = ['#02CF2F', '#EE00D6', '#0190E0', '#FF7200', '#FF2500', '#AF1616', '#FFC700', '#3E0099', '#462F8A', '#FF7A00', '#000000'];
 let selectedMenuBtnId;
 let includeAttribute = 'w3-include-html';
 let desktopView;
 let viewchange = false;
+let clickIndex = 0;
+let logOutMenu = false;
 
 
 function initLoginStart() {
@@ -254,6 +255,7 @@ function legalNoticeSelected() {
  */
 function logOutBtn() {
 	document.getElementById('logOut').classList.toggle('logOutOn');
+	logOutMenu = !logOutMenu;
 }
 
 /**
@@ -315,4 +317,15 @@ function initContactsMobHighlight() {
 	document.getElementById('initBoardMob').classList.remove('initMobHighlight');
 	document.getElementById('initAddTaskMob').classList.remove('initMobHighlight');
 	document.getElementById('initContactsMob').classList.add('initMobHighlight');
+}
+
+window.onclick = function(event) {
+	let modal = document.getElementById('logOut');
+	if (event.target !== modal && logOutMenu){
+		clickIndex++;
+	}
+    if (logOutMenu && clickIndex > 1) {
+		logOutBtn();
+		clickIndex = 0;
+    }
 }
