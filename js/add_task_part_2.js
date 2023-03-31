@@ -270,24 +270,13 @@ async function createTaskData(workflow) {
 	await loadTask();
 	getDataFromFomular();
 	await createAssignToListForSave();
-	await minOneSubtask();
+	// await minOneSubtask();
 	fillTaskData(workflow);
 	pushTaskData();
 	saveTask();
 	setTimeout(initBoard, 1200);
 	resetAssignToList();
 	clearFormularData();
-}
-
-/**
- * Checks if at least one subtask has been selected. If not, adds a default subtask.
- * @returns - {Promise<void>} - Promise object that resolves with no value.
- */
-async function minOneSubtask() {
-	if (noSubtaskSelected()) {
-		alert('At least one subtask is required! A subtask is set automatically.');
-		setDefaultSubtask();
-	}
 }
 
 /**

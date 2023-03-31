@@ -157,19 +157,6 @@ function addSubtask() {
 }
 
 /**
-* Adds a "Subtask" subtask to the subtaskArray and updates the UI.
-*/
-function addSubtaskMain() {
-	let subTaskText = 'Ready for Feedback ?';
-	subTaskArray = [];
-	subTaskInputLeave();
-	pushNewSubtaskDatatoArray(subTaskText);
-	renderSubtasks();
-	resetSubtaskInput();
-	createSubtaskListToSave();
-}
-
-/**
  * Pushes a new subtask object to the subTaskArray with subtaskText and subtaskStatus properties.
  * @param {string} subTaskText - The text of the new subtask.
  */

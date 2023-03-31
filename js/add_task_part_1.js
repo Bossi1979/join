@@ -51,7 +51,6 @@ function initSubfunctionAddTask() {
 	setFutureDatesOnlyForInputDueDate();
 	loadContributorsLetter();
 	taskForce = [];
-	addSubtaskMain();
 	addContactToTaskForceWithCheckBox(loggedInUserIndex);
 	setIndexOfGuest();
 	setPrioBtnIdElements();

@@ -352,7 +352,6 @@ async function showAddTaskPopupWindow(workflow) {
 	newCatInputActive = false;
 	renderAssignToPopupWindow();
 	setFutureDatesOnlyForInputDueDate();
-	addSubtaskMain();
 	setPrioBtnforOtherPages();
 }
 
