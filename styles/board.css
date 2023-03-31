@@ -608,7 +608,7 @@
 	background: #f6f7f8;
 }
 
-boardSubheaders > * {
+boardSubheaders>* {
 	flex-basis: 100%;
 }
 
@@ -987,11 +987,13 @@ boardSubheaders > * {
 	justify-content: flex-end;
 	width: 100%;
 	position: sticky;
-	bottom: 0px;
+	bottom: -45px;
 	order: 10;
 	z-index: 10;
 	gap: 10px;
 	background: #ffffff;
+	padding-bottom: 45px;
+	margin-top: 20px;
 }
 
 .editButton {
@@ -1076,7 +1078,8 @@ boardSubheaders > * {
 	flex: none;
 	order: 6;
 	z-index: 6;
-	flex-wrap: wrap;
+	/* flex-wrap: wrap; */
+	flex-direction: column;
 }
 
 .boardSubtasksDiv div span {
@@ -1198,6 +1201,7 @@ boardSubheaders > * {
 	height: 61px;
 	right: 75px;
 	bottom: 72px;
+	z-index: 100;
 }
 
 .boardAddTaskBtnInnerContainer {
@@ -1645,6 +1649,39 @@ boardSubheaders > * {
 	color: #f6f7f8;
 }
 
+
+.addTaskCheckboxBoard {
+	/* flex-direction: unset !important; */
+	max-width: 420px !important;
+	/* flex-wrap: wrap; */
+	height: fit-content !important;
+	/* overflow: hidden;
+	overflow-y: scroll; */
+	margin-bottom: 170px;
+	max-height: 143px;
+    overflow-y: scroll;
+}
+
+.addTaskCheckboxBoard input {
+	width: 16px;
+	height: 16px;
+	border-radius: 3px;
+	flex: none;
+	order: 0;
+	flex-grow: 0;
+	cursor: pointer;
+}
+
+.checkboxBoard {
+	width: 16px;
+	height: 16px;
+	border-radius: 3px;
+	flex: none;
+	order: 0;
+	flex-grow: 0;
+	cursor: pointer;
+}
+
 @media screen and (max-width: 1350px) {
 	.boardContainer {
 		padding-left: 53px;
@@ -1704,6 +1741,7 @@ boardSubheaders > * {
 	.boardAddTaskBtnOuterContainer {
 		left: 158px;
 		top: 1360px;
+		position: sticky;
 	}
 
 	.boardAddTaskBtnInnerContainer {
@@ -1748,13 +1786,49 @@ boardSubheaders > * {
 		z-index: 1;
 	}
 
-	.addTaskCheckbox {
-		flex-direction: unset !important;
+	.addTaskCheckboxBoard {
+		/* flex-direction: unset !important; */
 		width: 420px !important;
-		flex-wrap: wrap;
+		/* flex-wrap: wrap; */
 		height: fit-content !important;
-		overflow: hidden;
-		overflow-y: scroll;
+		/* overflow: hidden;
+		overflow-y: scroll; */
+		margin-bottom: 170px;
+		max-height: unset;
+	}
+
+	.addTaskCheckboxBoard input {
+		width: 16px;
+		height: 16px;
+		border-radius: 3px;
+		flex: none;
+		order: 0;
+		flex-grow: 0;
+		cursor: pointer;
+	}
+
+	.checkboxBoard {
+		width: 16px;
+		height: 16px;
+		border-radius: 3px;
+		flex: none;
+		order: 0;
+		flex-grow: 0;
+		cursor: pointer;
+	}
+
+	.addTaskCheckboxBoard span {
+		width: 74px;
+		height: 19px;
+		font-family: 'Inter';
+		font-style: normal;
+		font-weight: 400;
+		font-size: 16px;
+		line-height: 120%;
+		color: #000000;
+		flex: none;
+		order: 1;
+		flex-grow: 0;
 	}
 
 	#boardEditDueDate {
@@ -1852,16 +1926,19 @@ boardSubheaders > * {
 	.canbanBoard {
 		padding-bottom: 79px;
 	}
+
 	.boardContainer {
 		padding: 32px;
 		justify-content: unset;
 	}
+
 	.boardTaskCardPopup {
 		height: 100%;
 		width: 100%;
 		border-radius: 0;
 		overflow: scroll;
 	}
+
 	.taskCardPopupTask span {
 		font-size: 36px;
 	}
@@ -1875,6 +1952,7 @@ boardSubheaders > * {
 		top: 800px;
 	}
 }
+
 @media screen and (max-height: 780px) {
 	.boardTaskCardPopup {
 		height: 100%;
@@ -1957,6 +2035,7 @@ boardSubheaders > * {
 	.addTaskButton span {
 		display: none;
 	}
+
 	.inputOutContainer {
 		height: fit-content;
 	}

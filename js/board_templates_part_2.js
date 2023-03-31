@@ -168,7 +168,7 @@ function renderAddTaskPopupHtml(workflow) {
                             <img src='./assets/img/akar-icons_check.png' onclick='addSubtask()'>
                         </div>   
                     </div>
-                    <div class='addTaskCheckbox' id='subtaskCheckboxes'>
+                    <div class='addTaskCheckboxBoard' id='subtaskCheckboxes'>
         
                     </div>   
                 </div>
@@ -287,7 +287,7 @@ function renderAddTaskPopupHtml(workflow) {
 						<img src="./assets/img/akar-icons_check.png" onclick="addSubtask()" />
 					</div>
 				</div>
-				<div class="addTaskCheckbox" id="subtaskCheckboxes"></div>
+				<div class="addTaskCheckboxBoard" id="subtaskCheckboxes"></div>
 			</div>
 			<div class="addTaskBtnOuterContainerContacts" id="addTaskBtnOuterContainer">
 			<div class="addTaskBtnInnerContainerContacts">
