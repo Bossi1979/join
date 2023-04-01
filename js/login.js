@@ -45,7 +45,6 @@ function guestLogIn() {
  */
 // check input format
 function checkCorrectInput() {
-	insertInfoMessage(4);
 	let email = document.getElementById('inputEmailLogin');
 	let password = document.getElementById('inputPasswordLogin');
 	let requiredEmail = document.getElementById('requiredEmailLogin');

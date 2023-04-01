@@ -9,8 +9,6 @@ function backToLogIn() {
  * It checks the input formatting of the sign up form.
  */
 function inputValueTest() {
-	// insertInfoMessage(4);
-	debuggger;
 	let name = document.getElementById('inputNameSignUp');
 	let email = document.getElementById('inputEmailSignUp');
 	let password = document.getElementById('inputPasswordSignUp');

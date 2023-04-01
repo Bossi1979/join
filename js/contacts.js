@@ -104,15 +104,16 @@ function alphabet() {
  * @returns {void}
  */
 function openEditContact(i) {
-	let email = allUsers[i].email;
-	if (guestLoggedIn) {
-		alert('please sign in first');
-		return;
-	}
-	if (email == guestEmail) {
-	} else {
-		openEditContactsOf(allUsers, i);
-	}
+	// let email = allUsers[i].email;
+	// if (guestLoggedIn) {
+	// 	alert('please sign in first');
+	// 	return;
+	// }
+	// if (email == guestEmail) {
+	// } else {
+	// 	openEditContactsOf(allUsers, i);
+	// }
+	openEditContactsOf(allUsers, i);
 }
 
 /**

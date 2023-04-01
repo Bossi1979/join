@@ -21,7 +21,7 @@
 	<body onload="initLoginMob()">
 
 		<!-- Info Messages -->
-		<div class="shadowOverlay d-none" id="shadowScreen" onclick="closeInfoPopup()">
+		<div class="shadowOverlayM d-none" id="shadowScreen" onclick="closeInfoPopup()">
 			<div class="infoPopup" id="infoPopup" onclick="stopCloseure(event)">
 				<h3 id="infoTitle"><img src="./assets/img/join_logo.png">Titel</h3>
 				<div class="messageBox">
@@ -58,7 +58,7 @@
 					/>
 				</svg>
 			</a>
-			<form action="" onsubmit="checkCorrectInput() ;return false">
+			<!-- <form action="" onsubmit="checkCorrectInput() ;return false"> -->
 				<div class="loginMasterContainer" id="logInMasterContainerMob">
 					<div class="logInHeadlineContainer">
 						<span>Log in</span>
@@ -97,7 +97,7 @@
 						<span class="loginForgotPassword" onclick="showForgotPasswordMob()">Forgot my password</span>
 					</div>
 					<div class="logInButtonContainer">
-						<button class="logInButton">
+						<button class="logInButton" onclick="checkCorrectInput()">
 							<span>Log in</span>
 						</button>
 						<button class="guestButton" onclick="guestLogIn()">
@@ -105,10 +105,10 @@
 						</button>
 					</div>
 				</div>
-			</form>
+			<!-- </form> -->
 
 			<!--signup-->
-			<form action="" onsubmit="inputValueTest() ;return false">
+			<!-- <form action="" onsubmit=""> -->
 				<div class="signUpMasterContainer d-none" id="signInMasterContainerMob">
 					<div class="signUpHeadline">
 						<span>Sign up</span>
@@ -146,7 +146,7 @@
 							<span class="required" id="requiredPassword">min 8 characters with, "a" min "A" min "0-9"</span>
 						</div>
 					</div>
-					<button class="signupButtonContainer">
+					<button class="signupButtonContainer" onclick="inputValueTest()">
 						<span id="signUpButton">Sign up</span>
 					</button>
 					<div class="arrowContainer" onclick="backToLogInMob()">
@@ -158,7 +158,7 @@
 						</div>
 					</div>
 				</div>
-			</form>
+			<!-- </form> -->
 
 			<!--forgotPW-->
 			<form class="formForgot d-none" id="formForgotPassword" action="" onsubmit="sendMailButton() ;return false">

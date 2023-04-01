@@ -3,23 +3,23 @@ let messageArray = [
         'logo': '<img src="./assets/img/join_logo.png"></img>',
     },
     {
-        'title': 'Password not allowed',
-        'message': 'Your chosen password is invalid! At least eight characters, with upper and lower case letters and at least one number required.',
+        'title': 'Name entry not complete',
+        'message': 'Your entered only one name or nothing. Please enter first and lastname',
         'messageId': 1,
     },
     {
-        'title': 'Name entry not complete',
-        'message': 'Your entered only one name or nothing. Please enter first and lastname',
+        'title': 'Email Address Invalid',
+        'message': 'An e-mail address consists of an @ sign, as well as a local part in front of it and a domain part behind it, as in our example join-user@test.de',
         'messageId': 2,
     },
     {
-        'title': 'Email invalid',
-        'message': 'Your email address format is invaled. Please enter a valid emailadress.',
+        'title': 'Password not allowed',
+        'message': 'Your chosen password is invalid! At least eight characters, with upper and lower case letters and at least one number required.',
         'messageId': 3,
     },
     {
         'title': 'Login failed',
-        'message': 'Please check your emailaddress and password entrie.',
+        'message': 'Please check your emailaddress and password entrie. Or use the "Forgot my password" function by clicking on the link below the email input.',
         'messageId': 4,
     },
     {
@@ -37,7 +37,14 @@ let messageArray = [
         'message': 'Please move the card first in the "In progress" column.',
         'messageId': 7,
     },
+    {
+        'title': 'Password not allowed',
+        'message': 'Your chosen password is invalid! At least eight characters, with upper and lower case letters and at least one number required.',
+        'messageId': 8,
+    },
 ]
+
+let infoPopupOpened = false;
 
 /**
  * This Function open the info popup window.
@@ -45,6 +52,7 @@ let messageArray = [
 function openInfoPopup() {
     let shadowScreen = document.getElementById('shadowScreen');
     shadowScreen.classList.remove('d-none');
+    infoPopupOpened = true;
 }
 
 /**
@@ -53,6 +61,7 @@ function openInfoPopup() {
 function closeInfoPopup() {
     let shadowScreen = document.getElementById('shadowScreen');
     shadowScreen.classList.add('d-none');
+    infoPopupOpened = false;
 }
 
 /**
@@ -68,7 +77,7 @@ function stopCloseure(event) {
  * 
  * @param {number} messageIndex - The index of the message to display in the `messageArray`.
  */
-function insertInfoMessage(messageIndex){
+async function insertInfoMessage(messageIndex){
     let infoTitle = document.getElementById('infoTitle');
     let infoText = document.getElementById('infoText');
     infoTitle.innerHTML ='';
@@ -77,4 +86,17 @@ function insertInfoMessage(messageIndex){
     infoTitle.innerHTML += messageArray[messageIndex].title;
     infoText.innerHTML += messageArray[messageIndex].message;
     openInfoPopup();
+}
+
+/**
+ * An asynchronous function that displays an additional info message 
+ * if the previous popup window closed.
+ * 
+ * @param {number} messageIndex - The index of the info message to be displayed.
+ */
+async function additionalInfoMessage(messageIndex){
+    if (!infoPopupOpened){
+        await insertInfoMessage(messageIndex);
+        openInfoPopup();
+    }else setTimeout(()=>{additionalInfoMessage(messageIndex);}, 500);
 }

@@ -27,14 +27,18 @@ function resetRequiredLine(email, password, requiredEmail, requiredPassword) {
  */
 function calculateCheckCorrectInput(email, password, requiredEmail, requiredPassword) {
 	if (email.value || password.value) {
+
 		if (emailTest.test(email.value)) requiredEmail.classList.remove('requiredOn');
 		else requiredEmail.classList.add('requiredOn');
 		if (passwordTest.test(password.value)) requiredPassword.classList.remove('requiredOn');
 		else requiredPassword.classList.add('requiredOn');
 		if (!requiredEmail.classList.contains('requiredOn') && !requiredPassword.classList.contains('requiredOn')) userLogin(email.value, password.value);
+		showRequiredInfoMsg2(0, requiredEmail, requiredPassword);
 	} else {
 		requiredEmail.classList.add('requiredOn');
 		requiredPassword.classList.add('requiredOn');
+		insertInfoMessage(2);
+		additionalInfoMessage(3);
 	}
 }
 
@@ -91,6 +95,7 @@ function loginFailed(requiredEmailLogin, requiredPasswordLogin) {
 	requiredEmailLogin.innerHTML = `Email or Password do not match!!`;
 	requiredPasswordLogin.classList.add('requiredOn');
 	requiredPasswordLogin.innerHTML = `Email or Password do not match!!`;
+	insertInfoMessage(4);
 }
 
 

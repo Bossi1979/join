@@ -1,5 +1,5 @@
 /* shadowOverlay ist bereits in einer anderen Css enthalten ! */
-.shadowOverlay {
+.shadowOverlayM {
 	display: flex;
 	justify-content: center;
 	align-items: center;
@@ -9,7 +9,7 @@
 	background-color: rgba(0, 0, 0, 0.2);
 	left: 0px;
 	top: 0;
-	z-index: 10;
+	z-index: 1000;
 	cursor: pointer;
 	overflow: hidden;
     box-sizing: unset;

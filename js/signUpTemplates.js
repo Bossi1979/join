@@ -25,6 +25,9 @@ function calculateinputValueTest(name, email, password, requiredName, requiredEm
 		requiredName.classList.add('requiredOn');
 		requiredEmail.classList.add('requiredOn');
 		requiredPassword.classList.add('requiredOn');
+		insertInfoMessage(1);
+		additionalInfoMessage(2);
+		additionalInfoMessage(3);
 	}
 }
 
@@ -38,16 +41,72 @@ function calculateinputValueTest(name, email, password, requiredName, requiredEm
  * @param requiredPassword - the element that will be added the class 'requiredOn' if the password
  * input is empty or starts with a space.
  */
-function LogIninputValidation(name, email, password, requiredName, requiredEmail, requiredPassword){
+function LogIninputValidation(name, email, password, requiredName, requiredEmail, requiredPassword) {
 	if (nameTest.test(name.value)) requiredName.classList.remove('requiredOn');
-		else requiredName.classList.add('requiredOn');
-		if (emailTest.test(email.value)) requiredEmail.classList.remove('requiredOn');
-		else requiredEmail.classList.add('requiredOn');
-		if (passwordTest.test(password.value)) requiredPassword.classList.remove('requiredOn');
-		else requiredPassword.classList.add('requiredOn');
-		if (!requiredName.classList.contains('requiredOn') && !requiredEmail.classList.contains('requiredOn') && !requiredPassword.classList.contains('requiredOn')) {
-			emailToCheck(name.value, email.value, password.value);
-		}
+	else requiredName.classList.add('requiredOn');
+	if (emailTest.test(email.value)) requiredEmail.classList.remove('requiredOn');
+	else requiredEmail.classList.add('requiredOn');
+	if (passwordTest.test(password.value)) requiredPassword.classList.remove('requiredOn');
+	else requiredPassword.classList.add('requiredOn');
+	if (!requiredName.classList.contains('requiredOn') && !requiredEmail.classList.contains('requiredOn') && !requiredPassword.classList.contains('requiredOn')) {
+		emailToCheck(name.value, email.value, password.value);
+	} else showRequiredInfoMsg2( requiredName, requiredEmail, requiredPassword);
+}
+
+/**
+ * A function that check witch two parameter unvalid, and call the associated info message.
+ * 
+ * @param requiredName - the span element that will be added to the name input
+ * @param requiredEmail - the span element that will be added to the DOM if the email input is invalid
+ * @param requiredPassword - the element that will be added the class 'requiredOn' if the password
+ */
+function showRequiredInfoMsg(requiredName, requiredEmail, requiredPassword) {
+	if (twoEntriesUnvalid(requiredName, requiredEmail)) {
+		insertInfoMessage(1);
+		additionalInfoMessage(2);
+	} else if (twoEntriesUnvalid(requiredName, requiredPassword)) {
+		insertInfoMessage(1);
+		additionalInfoMessage(3);
+	} else if (twoEntriesUnvalid(requiredEmail, requiredPassword)) {
+		insertInfoMessage(2);
+		additionalInfoMessage(3);
+	} else showRequiredInfoMsg2(requiredName, requiredEmail, requiredPassword);
+}
+
+/**
+ * A function that check witch parameter unvalid, and call the associated info message.
+ * 
+ * @param requiredName - the span element that will be added to the name input
+ * @param requiredEmail - the span element that will be added to the DOM if the email input is invalid
+ * @param requiredPassword - the element that will be added the class 'requiredOn' if the password
+ */
+function showRequiredInfoMsg2(requiredName, requiredEmail, requiredPassword) {
+	if(requiredName !=0) if (oneEntrieUnvalid(requiredName)) insertInfoMessage(1);
+	if (oneEntrieUnvalid(requiredEmail)) additionalInfoMessage(2);
+	if (oneEntrieUnvalid(requiredPassword)) additionalInfoMessage(3);
+}
+
+/**
+ * A function that checks whether a required input field has the 'requiredOn' class.
+ * 
+ * @param {Element} entrieOne - The required input field to check.
+ * @returns {boolean} Returns true if the input field has the 'requiredOn' class, 
+ * indicating that it is invalid, and false otherwise. 
+ */
+function oneEntrieUnvalid(entrieOne) {
+	return entrieOne.classList.contains('requiredOn');
+}
+
+/**
+ * A function that checks whether a required input field has the 'requiredOn' class.
+ * 
+ * @param {Element} entrieOne - The required input field to check.
+ * @returns {boolean} Returns true if the input field has the 'requiredOn' class, 
+ * indicating that it is invalid, and false otherwise. 
+ */
+function twoEntriesUnvalid(entrieOne, entrieTwo) {
+	return entrieOne.classList.contains('requiredOn') &&
+		entrieTwo.classList.contains('requiredOn');
 }
 
 /**
