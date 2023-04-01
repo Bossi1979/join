@@ -273,10 +273,16 @@ async function createTaskData(workflow) {
 	// await minOneSubtask();
 	fillTaskData(workflow);
 	pushTaskData();
-	saveTask();
+	await saveTask();
+	debugger;
+	showAddDiv();
+
+	setTimeout(notShowAddDiv(), 1000);
 	setTimeout(initBoard, 1200);
+
 	resetAssignToList();
 	clearFormularData();
+
 }
 
 /**

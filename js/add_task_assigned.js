@@ -335,5 +335,5 @@ function clearTaskForce() {
  * Opens window with a message
  */
 function frontEndDeveloper() {
-	alert('This function is part of backend. The course is about frontend though');
+	insertInfoMessage(5);
 }

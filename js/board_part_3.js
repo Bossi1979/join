@@ -1,5 +1,5 @@
 
-let searchTerm;
+let searchTerm = '';
 let arrayMoveBtnText = [
 	{
 		workStatus: 0,
@@ -23,6 +23,23 @@ let arrayMoveBtnText = [
 	},
 ];
 
+/**
+ * This function render the popup menu AddTask.
+ */
+async function renderAddTaskPopup(workflow) {
+	document.getElementById('boardPopup').innerHTML = '';
+	document.getElementById('boardPopup').innerHTML = renderAddTaskPopupHtml(workflow);
+}
+
+/**
+ * If the workFlowStatus of the task is 3, then remove the class 'd-none' from the delete button.
+ * @param taskIndex - the index of the task in the array
+ */
+function showDeleteButton(taskIndex) {
+	if (joinTaskArray[taskIndex].workFlowStatus == 3) {
+		document.getElementById('deleteButton').classList.remove('d-none');
+	}
+}
 
 /**
  * The function deleteButton() takes the taskIndex as a parameter and removes the task from the
@@ -258,4 +275,9 @@ function trackThatAddTaskIsClose() {
  */
 function allowAddTaskPopUp() {
 	addTaskOpen = true;
+}
+
+function noSubtaskAvailable(subTasksAmount, doneId){
+	let doneBarElement = document.getElementById(doneId);
+	if (subTasksAmount == 0) doneBarElement.classList.add('d-none');
 }

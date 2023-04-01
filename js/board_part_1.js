@@ -81,6 +81,7 @@ async function createWorkStatusArrays() {
 
 /**
  * Returns whether the given `taskWorkStatus` is equal to the given `index`.
+ * 
  * @param {number} taskWorkStatus - The `workFlowStatus` of a task.
  * @param {number} index - The index to compare to the `taskWorkStatus`.
  * @returns {boolean} `true` if `taskWorkStatus` equals `index`, `false` otherwise.
@@ -91,6 +92,7 @@ function workflowStatusIsEqual(taskWorkStatus, index) {
 
 /**
  * It takes the data from the joinTaskArray and creates a new array called workStatusArray.
+ * 
  * @param index - the index of the array that the json will be pushed to
  * @param taskIndex - the index of the task in the joinTaskArray
  */
@@ -108,6 +110,7 @@ function createWorkStatusArrayData(index, taskIndex) {
 
 /**
  * It takes in a bunch of parameters and returns a JSON object.
+ * 
  * @param cardTitle - The title of the card.
  * @param cardDescription - The description of the card.
  * @param cardCatColor - The color of the category of the card.
@@ -154,7 +157,8 @@ async function renderAllCards() {
 }
 
 /**
- * It takes two numbers, divides the first by the second, and multiplies the result by 100
+ * It takes two numbers, divides the first by the second, and multiplies the result by 100.
+ * 
  * @param number - The number you want to calculate the percentage of.
  * @param total - The total number of items.
  * @returns The percentage of the number in relation to the total.
@@ -316,6 +320,7 @@ function setCategoryBackgroundColorForWorkStatus3() {
 
 /**
  * It takes the priority of a task and displays the corresponding icon.
+ * 
  * @param taskIndex - The index of the task in the array.
  */
 function showContributorsPrioIcon(taskIndex) {
@@ -330,6 +335,7 @@ function showContributorsPrioIcon(taskIndex) {
 
 /**
  * This function cache the id of the dragged element.
+ * 
  * @param {string} id - the id is the id of the dragged element.
  */
 function startDrag(id) {
@@ -338,6 +344,7 @@ function startDrag(id) {
 
 /**
  * This function allows to drop an draggable element.
+ * 
  * @param {event} ev
  */
 function allowDrop(ev) {
@@ -345,7 +352,8 @@ function allowDrop(ev) {
 }
 
 /**
- * Moves the current dragged element to the specified work flow area if certain conditions are met.
+ * Moves a dragged element to a new area if allowed, and displays an error message if not.
+ * 
  * @param {number} area - The work flow area to move the element to.
  */
 function moveTo(area) {
@@ -354,15 +362,29 @@ function moveTo(area) {
 	let doneBarWidth = doneBarDraggedElement.offsetWidth;
 	let doneBarOuterWidth = doneBarOuterDraggedElement.offsetWidth;
 	let workFlowStatusDraggedElement = joinTaskArray[currentDraggedElement]['workFlowStatus'];
-	if ((doneBarWidth == doneBarOuterWidth && workFlowStatusDraggedElement >= 1) || (workFlowStatusDraggedElement < 1 && area < 2) || area < workFlowStatusDraggedElement) {
-		moveToNewArea(area);
-	} else {
-		alert('Please complete all subtasks and only move the card one column further or back.');
-	}
+	if (moveAllowed(doneBarWidth, doneBarOuterWidth, workFlowStatusDraggedElement, area)) moveToNewArea(area);
+	else if(doneBarWidth != doneBarOuterWidth && workFlowStatusDraggedElement >= 1) insertInfoMessage(6);
+	else if(workFlowStatusDraggedElement == 0 && area > 1) insertInfoMessage(7);
+}
+
+/**
+ * Checks if moving the dragged element to the new area is allowed.
+ * 
+ * @param {number} doneBarWidth - The width of the done bar.
+ * @param {number} doneBarOuterWidth - The width of the frame of the done bar.
+ * @param {number} workFlowStatusDraggedElement - The work flow status of the dragged element. 
+ * @param {number} area - The area to move the element to. 
+ * @returns {boolean} - Whether or not moving the element is allowed. 
+ */
+function moveAllowed(doneBarWidth, doneBarOuterWidth, workFlowStatusDraggedElement, area){
+	return ((doneBarWidth == doneBarOuterWidth && workFlowStatusDraggedElement >= 1) 
+	|| (workFlowStatusDraggedElement < 1 && area < 2) 
+	|| (area < workFlowStatusDraggedElement));
 }
 
 /**
  * Moves the dragged element to a new work flow area.
+ * 
  * @param {number} area - The new work flow area the element will be moved to.
  */
 async function moveToNewArea(area) {
@@ -371,20 +393,4 @@ async function moveToNewArea(area) {
 	await createWorkStatusArrays();
 	await renderAllCards();
 	searchAfterPopup();
-}
-
-/**
- * This function change the backgroundcolor of the droparea, if a dragged element is over it.
- * @param {string} id - is the id of the element where the dragged element is over it.
- */
-function highlight(id) {
-	document.getElementById(id).classList.add('drag-area-highlight');
-}
-
-/**
- * This function reset the backgroundcolor settings during hovering of thedragged element.
- * @param {string} id - is the id of the element where the dragged element is dropped.
- */
-function removeHighlight(id) {
-	document.getElementById(id).classList.remove('drag-area-highlight');
 }

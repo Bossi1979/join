@@ -1,4 +1,21 @@
 /**
+ * This function change the backgroundcolor of the droparea, if a dragged element is over it.
+ * 
+ * @param {string} id - is the id of the element where the dragged element is over it.
+ */
+function highlight(id) {
+	document.getElementById(id).classList.add('drag-area-highlight');
+}
+
+/**
+ * This function reset the backgroundcolor settings during hovering of thedragged element.
+ * @param {string} id - is the id of the element where the dragged element is dropped.
+ */
+function removeHighlight(id) {
+	document.getElementById(id).classList.remove('drag-area-highlight');
+}
+
+/**
  * Enables a popup window for a task.
  * 
  * @param {number} taskIndex - The index of the task to enable the popup for.
@@ -33,7 +50,6 @@ function taskCardInBoardClicked(taskIndex) {
 function addTaskSelected(taskIndex) {
 	return !taskCardInBoardClicked(taskIndex);
 }
-
 
 /**
  * Disables a popup window that has been opened previously.
@@ -373,23 +389,5 @@ function setPrioBtnforOtherPages() {
 		urgentBtn = document.getElementById('addTaskUrgent');
 		mediumBtn = document.getElementById('addTaskMedium');
 		lowBtn = document.getElementById('addTaskLow');
-	}
-}
-
-/**
- * This function render the popup menu AddTask.
- */
-async function renderAddTaskPopup(workflow) {
-	document.getElementById('boardPopup').innerHTML = '';
-	document.getElementById('boardPopup').innerHTML = renderAddTaskPopupHtml(workflow);
-}
-
-/**
- * If the workFlowStatus of the task is 3, then remove the class 'd-none' from the delete button.
- * @param taskIndex - the index of the task in the array
- */
-function showDeleteButton(taskIndex) {
-	if (joinTaskArray[taskIndex].workFlowStatus == 3) {
-		document.getElementById('deleteButton').classList.remove('d-none');
 	}
 }

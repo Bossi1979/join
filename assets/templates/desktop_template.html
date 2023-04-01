@@ -15,7 +15,7 @@
 						<td id="btn_board_menu_text">Board</td>
 					</tr>
 					<tr class="trHover" id="btn_add_task_menu" onclick="initAddTask()">
-						<td><img src=".\assets\img/img_board.png" id="imgAddTask1" /><img src=".\assets\img/img_board_w.png" id="imgAddTask2" /></td>
+						<td><img src=".\assets\img/img_add_task.png" id="imgAddTask1" /><img src=".\assets\img/img_add_task_w.png" id="imgAddTask2" /></td>
 						<td></td>
 						<td id="btn_add_task_menu_text">Add Task</td>
 					</tr>
@@ -129,4 +129,16 @@
 			<span class="btnMobileBtnName">Contacts</span>
 		</div>
 	</nav>
+</div>
+
+<!-- Info Messages -->
+<div class="shadowOverlay d-none" id="shadowScreen" onclick="closeInfoPopup()">
+	<div class="infoPopup" id="infoPopup" onclick="stopCloseure(event)">
+		<h3 id="infoTitle"><img src="./assets/img/join_logo.png">Titel</h3>
+		<div class="messageBox">
+			<p id="infoText">Your chosen password is invalid! At least eight characters, with upper and lower case letters and at least one number required.</p>
+		</div>
+		<hr>
+		<button onclick="closeInfoPopup()">OK</button>
+	</div>
 </div>
