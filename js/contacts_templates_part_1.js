@@ -48,8 +48,9 @@ function calculateUserInAlphabetArray(arr) {
         let name = user.name;
         let email = user.email;
         let letter = user.firstSecondLetter;
-        let firstLetter = user.firstSecondLetter[0];
-        alphabetOrd[firstLetter].push({ name: name, email: email, id: id, letter: letter, colorIndex: colorIndex, });
+        // let firstLetter = user.firstSecondLetter[1];
+        let secondLetter = user.firstSecondLetter[1];
+        alphabetOrd[secondLetter].push({ name: name, email: email, id: id, letter: letter, colorIndex: colorIndex, });
     });
 }
 
@@ -58,6 +59,7 @@ function calculateUserInAlphabetArray(arr) {
  * add the letter to the HTML, and then loop through the array and add the names to the HTML.
  */
 function calculateAndShowAlphabet() {
+    debugger;
     for (let alphabetLetter in alphabetOrd) {
         if (alphabetOrd[alphabetLetter].length > 0) {
             document.getElementById('Contact_list').innerHTML += showLettersHTML(alphabetLetter);

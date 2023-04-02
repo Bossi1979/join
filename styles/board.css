@@ -1229,6 +1229,7 @@ boardSubheaders>* {
 	height: 74px;
 	filter: drop-shadow(0px 0px 4px rgba(0, 0, 0, 0.1));
 	top: 1129px;
+	z-index: 11;
 }
 
 .close_logo_edit_task {
@@ -1674,6 +1675,26 @@ boardSubheaders>* {
 	order: 0;
 	flex-grow: 0;
 	cursor: pointer;
+}
+
+.confimationDiv{
+	position:absolute;
+	top: 100%;
+	left: 0px;
+	width: 100%;
+	display: flex;
+	justify-content: center;
+	align-items: center;
+	height: 100%;
+	display: none;
+}
+
+.showConfimDiv{
+	display: flex !important;
+	transform: translateY(-100%);
+	transition-delay: 900ms;
+	transition-duration: 300ms;
+	transition: transform 200ms ease-in-out;
 }
 
 @media screen and (max-width: 1350px) {

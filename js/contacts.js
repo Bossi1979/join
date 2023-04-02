@@ -309,17 +309,24 @@ async function editContact(i) {
  * @param {number} i index of user of allUsers Array
  * @returns
  */
-async function deleteContactQuestion(i) {
+async function deleteContactQuestion(i, confirm) {
 	let letter = allUsers[i].firstSecondLetter;
 	let email = allUsers[i].email;
 	let deleteQuestion = document.getElementById('deleteContactQuestion');
 	let deleteQuestionInner = document.getElementById('deleteContactQuestion').innerHTML;
+	let deleteQuestion1 = document.getElementById('deleteContactQuestion1');
+	let deleteQuestionInner1 = document.getElementById('deleteContactQuestion1').innerHTML;
 	if (guestLoggedIn || email == guestEmail) return;
 	if (deletionRequested(letter, deleteQuestionInner)) {
-		deleteQuestion.innerHTML = `Delete?`;
-		deleteQuestion.style = 'font-size: 20px';
-	} else {
+		deleteQuestion.innerHTML = `Delete ? <br>Click here to<br> confirm.`;
+		deleteQuestion.style = 'font-size: 16px; text-align: center;';
+		deleteQuestion1.innerHTML = 'Cancel Deletion';
+	} else if(deleteQuestionInner == `Delete ? <br>Click here to<br> confirm.` && confirm == 'Y'){
 		deleteUser(i);
+	} else if (deleteQuestionInner1 == 'Cancel Deletion' && confirm == 'N'){
+		deleteQuestion.innerHTML = `${letter}`;
+		deleteQuestion.style = 'font-size: 47px; text-align: center;';
+		deleteQuestion1.innerHTML = `- Delete Contact  ${letter}`;
 	}
 }
 

@@ -323,7 +323,12 @@ async function saveEditTask(taskIndex, boardEditedTitle, boardEditedDescripten, 
 	joinTaskArray[taskIndex]['descripten'] = boardEditedDescripten;
 	joinTaskArray[taskIndex]['dueDate'] = boardEditedDueDate;
 	joinTaskArray[taskIndex]['prio'] = boardEditedPrio;
+	confirmEdit();
 	await saveTask();
+	setTimeout(renderBoardAfterSave, 2000);
+}
+
+async function renderBoardAfterSave(){
 	await renderBoard();
 	await createWorkStatusArrays();
 	await renderAllCards();

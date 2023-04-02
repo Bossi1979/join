@@ -84,13 +84,14 @@ function showContactHTML(name, email, phone, letter, color, i) {
 		    <div id="listing">
                     <img onclick="showContactList()" src="assets/img/back_logo_black.png" alt="">
                     </div>                       
-            <div class="show_contact_ellipse_5" style='background:${colorIndex[color]}' onclick="deleteContactQuestion(${i})">
+            <div class="show_contact_ellipse_5" style='background:${colorIndex[color]}' onclick="deleteContactQuestion(${i}, 'Y')">
                 <span id="deleteContactQuestion">${letter}</span>
             </div>
             <div class="showContact_Name_addTask">
                 <div class="rightSideShowContacts">
                     <h1 class="nameOnDisplay">${name}</h1>
                     <span onclick="allowAddTaskPopUp(), showAddTaskPopupWindow(0)">+ Add Task</span>
+                    <span id="deleteContactQuestion1" onclick="deleteContactQuestion(${i}, 'N')">- Delete Contact  ${letter}</span>
                 </div>
             </div>
         </div>

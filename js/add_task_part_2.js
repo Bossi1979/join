@@ -45,14 +45,24 @@ function addColorToCat(colorId) {
  * This function show a popup, that indicated that the new task is succsessfully created.
  */
 function showAddDiv() {
-	document.getElementById('taskCreatedIndication').classList.add('taskCreatedIndication');
+	if(selectedMenuBtnId ==3){
+		document.getElementById('addTaskToBoardIndicator').classList.remove('d-none');
+		document.getElementById('addTaskToBoardIndicator').classList.add('taskCreatedIndication1');
+	}else{
+		document.getElementById('taskCreatedIndication').classList.add('taskCreatedIndication');
+	}
 }
 
 /**
  * This function inhibited to show a popup, that indicated that the new task is succsessfuly created.
  */
 function notShowAddDiv() {
-	document.getElementById('taskCreatedIndication').classList.remove('taskCreatedIndication');
+	if(selectedMenuBtnId ==3){
+		document.getElementById('addTaskToBoardIndicator').classList.add('d-none');
+		document.getElementById('addTaskToBoardIndicator').classList.remove('taskCreatedIndication1');
+	}else{
+		document.getElementById('taskCreatedIndication').classList.remove('taskCreatedIndication');
+	}
 }
 
 /**
@@ -267,6 +277,8 @@ function clearValidationMessages() {
  * @returns {Promise<void>} - A Promise that resolves when the task data is successfully saved.
  */
 async function createTaskData(workflow) {
+	
+	
 	await loadTask();
 	getDataFromFomular();
 	await createAssignToListForSave();
@@ -275,7 +287,7 @@ async function createTaskData(workflow) {
 	pushTaskData();
 	await saveTask();
 	showAddDiv();
-	setTimeout(notShowAddDiv(), 1000);
+	setTimeout(notShowAddDiv, 1000);
 	setTimeout(initBoard, 1200);
 	resetAssignToList();
 	clearFormularData();

@@ -1360,6 +1360,20 @@
 	flex-grow: 0;
 }
 
+.addTaskToBoardIndicator{
+	position:absolute;
+	left: calc(46% - 113px);
+	top: calc(55% + 502px);
+	z-index: 2;
+}
+
+.taskCreatedIndication1 {
+	transform: translateY(-551px);
+	transition-delay: 900ms;
+	transition-duration: 300ms;
+	transition: transform 200ms ease-in-out;
+}
+
 .taskAddedToBoardContainer span {
 	width: 235px;
 	height: 24px;

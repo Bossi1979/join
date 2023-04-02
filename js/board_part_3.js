@@ -48,10 +48,12 @@ function showDeleteButton(taskIndex) {
  */
 async function deleteButton(taskIndex) {
 	joinTaskArray.splice(taskIndex, 1);
+	confirmDelete();
 	await saveTask();
-	await renderBoard();
-	await createWorkStatusArrays();
-	renderAllCards();
+	setTimeout(renderBoardAfterSave, 2000);
+	// await renderBoard();
+	// await createWorkStatusArrays();
+	// renderAllCards();
 }
 
 /**
@@ -281,3 +283,25 @@ function allowAddTaskPopUp() {
 // 	let doneBarElement = document.getElementById(doneId);
 // 	if (subTasksAmount == 0) doneBarElement.classList.add('d-none');
 // }
+
+function confirmEdit(){
+	addConfimationEditText();
+	showConfirmationDiv();
+}
+
+function confirmDelete(){
+	addConfimationDeleteText();
+	showConfirmationDiv();
+}
+
+function showConfirmationDiv(){
+	document.getElementById('confimationDiv').classList.add('showConfimDiv');
+}
+
+function addConfimationEditText(){
+	document.getElementById('confimationText'). innerHTML = 'Taskcard will be edited';
+}
+
+function addConfimationDeleteText(){
+	document.getElementById('confimationText'). innerHTML = 'Taskcard will be delete';
+}
