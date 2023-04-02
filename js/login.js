@@ -173,7 +173,10 @@ function sendMailButton() {
 	document.getElementById('requiredEmailForgot').innerHTML = `This field is required`;
 	let inputForgotValue = document.getElementById('inputForgot').value;
 	if (emailTest.test(inputForgotValue)) inputForgotValueOk(inputForgotValue);
-	else document.getElementById('requiredEmailForgot').classList.add('requiredOn');
+	else {
+		document.getElementById('requiredEmailForgot').classList.add('requiredOn');
+		insertInfoMessage(2);
+	}
 }
 
 /**
@@ -212,6 +215,7 @@ function preparationShowPasswordResetCard(i) {
 function comparisonFailed() {
 	document.getElementById('requiredEmailForgot').classList.add('requiredOn');
 	document.getElementById('requiredEmailForgot').innerHTML = `email is not available`;
+	insertInfoMessage(9);
 }
 
 /**

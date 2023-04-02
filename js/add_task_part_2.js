@@ -220,7 +220,7 @@ function clearFormularData() {
 	clearSubtasks();
 	clearValidationMessages();
 	resetAssignToList();
-	// emptySubTaskArray();
+	emptySubTaskArray();
 	renderSubtasks();
 	closeCatList();
 	clearTaskForce();
@@ -246,8 +246,8 @@ function clearDueDate() {
  * Clears the selected subtasks and resets the subtask section to its default state.
  */
 function clearSubtasks() {
-	resetSubtaskSelections();
-	selectedSubtasks = [];
+		resetSubtaskSelections();
+		selectedSubtasks = [];
 }
 
 /**
@@ -274,15 +274,11 @@ async function createTaskData(workflow) {
 	fillTaskData(workflow);
 	pushTaskData();
 	await saveTask();
-	debugger;
 	showAddDiv();
-
 	setTimeout(notShowAddDiv(), 1000);
 	setTimeout(initBoard, 1200);
-
 	resetAssignToList();
 	clearFormularData();
-
 }
 
 /**

@@ -8,8 +8,8 @@ let messageArray = [
         'messageId': 1,
     },
     {
-        'title': 'Email Address Invalid',
-        'message': 'An e-mail address consists of an @ sign, as well as a local part in front of it and a domain part behind it, as in our example join-user@test.de',
+        'title': 'Email address unvalid',
+        'message': 'An e-mail address consists of an @ sign, as well as a local part in front of it and a domain part behind it, as in our example joinuser@test.de',
         'messageId': 2,
     },
     {
@@ -41,6 +41,16 @@ let messageArray = [
         'title': 'Password not allowed',
         'message': 'Your chosen password is invalid! At least eight characters, with upper and lower case letters and at least one number required.',
         'messageId': 8,
+    },
+    {
+        'title': 'Email address unknown',
+        'message': 'The email you entered is not active in our database. Please check the entered email address.',
+        'messageId': 9,
+    },
+    {
+        'title': 'Phonenumber unvalid',
+        'message': 'The phone number you entered is invalid. Please enter a phone number with at least eight digits.',
+        'messageId': 10,
     },
 ]
 

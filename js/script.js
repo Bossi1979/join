@@ -319,6 +319,11 @@ function initContactsMobHighlight() {
 	document.getElementById('initContactsMob').classList.add('initMobHighlight');
 }
 
+/**
+ * Assigns a function to be called when a click event occurs on the window object.
+ *
+ * @param {Event} event - The click event object.
+ */
 window.onclick = function(event) {
 	let modal = document.getElementById('logOut');
 	if (event.target !== modal && logOutMenu){

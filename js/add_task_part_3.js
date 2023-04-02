@@ -233,8 +233,10 @@ function createSubtaskListToSave() {
 * Resets the checkboxes for subtask selection by unchecking all of them.
 */
 function resetSubtaskSelections() {
-	for (let i = 0; i < subTaskArray.length; i++) {
-		document.getElementById(`subtask${i}`).checked = false;
+	if (subTaskArray.length > 0){
+		for (let i = 0; i < subTaskArray.length; i++) {
+			document.getElementById(`subtask${i}`).checked = false;
+		}
 	}
 }
 
@@ -242,7 +244,7 @@ function resetSubtaskSelections() {
 * Removes all elements from the subTaskArray except for the first element
 */
 function emptySubTaskArray() {
-	subTaskArray.splice(1);
+	if(subTaskArray.length > 0) subTaskArray = [];
 }
 
 /**

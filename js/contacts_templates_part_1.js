@@ -150,6 +150,7 @@ function checkNameInput(name, newNameRequired) {
     if (!noNameInput(name)) {
         newNameRequired.classList.remove('d-none');
         newNameRequired.classList.add('requiredOn');
+        insertInfoMessage(1);
     } else {
         newNameRequired.classList.remove('requiredOn');
         newNameRequired.classList.add('d-none');
@@ -166,6 +167,7 @@ function checkEmailInput(email, newEmailRequired) {
     if (!noValidEmailInput(email)) {
         newEmailRequired.classList.remove('d-none');
         newEmailRequired.classList.add('requiredOn');
+        additionalInfoMessage(2);
     } else {
         newEmailRequired.classList.remove('requiredOn');
         newEmailRequired.classList.add('d-none');
@@ -182,9 +184,11 @@ function checkPhoneInput(phone, newPhoneRequired) {
     if (noPhoneNumber(phone)) {
         newPhoneRequired.classList.remove('d-none');
         newPhoneRequired.classList.add('requiredOn');
+        additionalInfoMessage(10);
     } else {
         newPhoneRequired.classList.remove('requiredOn');
         newPhoneRequired.classList.add('d-none');
+        
     }
 }
 

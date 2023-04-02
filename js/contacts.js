@@ -72,6 +72,7 @@ async function userInAlphabetArray() {
 
 /**
  * Responds to changes in the size of the browser window and adjusts the display of the contact list accordingly.
+ * 
  * @returns {void}
  */
 window.onresize = function contactListAutomaticResponisive() {
@@ -100,6 +101,7 @@ function alphabet() {
 
 /**
  * Opens the form for editing the selected contact if the user is logged in and the contact can be edited.
+ * 
  * @param {number} i  - the index of the user in the array
  * @returns {void}
  */
@@ -120,6 +122,7 @@ function openEditContact(i) {
  * It removes the class 'd-none' from the element with the id 'edit_contact', then it sets the
  * innerHTML of that element to the return value of the function openEditContactHTML(color, letter,
  * name, email, phone).
+ * 
  * @param {array} arr of users
  * @param {number}i - the index of the user in the array
  */
@@ -158,6 +161,7 @@ function openNewContact() {
 
 /**
  * Closes the pop-up window for creating a new contact and hides the form.
+ * 
  * @returns {void}
  */
 function closeNewContact() {
@@ -172,7 +176,8 @@ function closeNewContact() {
 
 /**
  * Closes the pop-up window for creating a new contact and hides the form.
- * @returns 
+ * 
+ * @returns {void}
  */
 function closeEditContact() {
 	const editContact = document.getElementById('edit_contact');
@@ -186,6 +191,7 @@ function closeEditContact() {
 
 /**
  * Depending on guestLoggedIn it chooses the right contacts to show
+ * 
  * @param {boolean} guestLoggedIn
  * @param {number} i= 
  */
@@ -328,13 +334,29 @@ function deletionRequested(letter, deleteQuestionInner) {
 }
 
 /**
- * deletes a user from the array allUsers
+ * Deletes a user from the array allUsers
+ * 
  * @param {number} i - user index
  */
 async function deleteUser(i) {
 	allUsers.splice(i, 1);
+	await renderContactsAfterDeletion();
+}
+
+/**
+ * This function is called when the user clicks on the contacts delete button in the menu. It loads the
+ * contacts page and renders the content.
+ */
+async function renderContactsAfterDeletion(){
+	document.getElementById('content').innerHTML = '';
+	document.getElementById('content').innerHTML = renderContentHTML();
+	sliderMenuShown = false;
+	selectedMenuButton(4);
+	await userInAlphabetArray();
+	loadContributorsLetter();
+	coworkersToAssignTo = transferallUserData();
+	initContactsMobHighlight();
 	await saveTask();
-	setTimeout(initContacts, 100);
 }
 
 /**

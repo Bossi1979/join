@@ -277,7 +277,7 @@ function allowAddTaskPopUp() {
 	addTaskOpen = true;
 }
 
-function noSubtaskAvailable(subTasksAmount, doneId){
-	let doneBarElement = document.getElementById(doneId);
-	if (subTasksAmount == 0) doneBarElement.classList.add('d-none');
-}
+// function noSubtaskAvailable(subTasksAmount, doneId){
+// 	let doneBarElement = document.getElementById(doneId);
+// 	if (subTasksAmount == 0) doneBarElement.classList.add('d-none');
+// }

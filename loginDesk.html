@@ -161,7 +161,8 @@
 			<!-- </form> -->
 
 			<!--forgotPW-->
-			<form class="formForgot d-none" id="formForgotPassword" action="" onsubmit="sendMailButton() ;return false">
+			<!-- <form class="formForgot d-none" id="formForgotPassword" action="" onsubmit="sendMailButton() ;return false"> -->
+			<div class="formForgot d-none" id="formForgotPassword">
 				<div class="forgotPasswordWindow" id="forgotPWMasterContainerMob">
 					<img onclick="backToLogInMob()" src="./assets/img/back_logo.png" alt="back to log-in page" />
 					<div class="innerContainerForgotPassword">
@@ -176,7 +177,7 @@
 							<span class="required" id="requiredEmailForgot">This field is required</span>
 							<!-- Btn Send Email -->
 							<div class="forgotButtonContainer">
-								<button class="forgotButton">
+								<button class="forgotButton" onclick="sendMailButton()">
 									<span>Send me the email</span>
 								</button>
 							</div>
@@ -189,7 +190,8 @@
 						</div>
 					</div>
 				</div>
-			</form>
+			</div>
+			<!-- </form> -->
 
 			<!--forgotReset-->
 			<form action="" onsubmit="resetbuttonContainerMob() ;return false">

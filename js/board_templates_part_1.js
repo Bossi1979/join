@@ -125,8 +125,9 @@ function toDoCardHtml(arrayIndex) {
 	let subTasksAmount = workStatus0Array[arrayIndex]['subTasks'].length;
 	let subTaskDoneAmount = determindSubTasksDone(arrayIndex, workStatusArrayNo);
 	let percentDone = calculatePercentage(subTaskDoneAmount, subTasksAmount);
+    let donebarClass = 'class="doneBar"';
+    if (subTasksAmount == 0) donebarClass = 'class="doneBar d-none"';
     let doneId = 'dBar' + taskIndex;
-    setTimeout(()=> noSubtaskAvailable(subTasksAmount, doneId), 500);
 	return /*html*/ `
         <div class='taskBackground' id='taskCard${taskIndex}' draggable='true' ondragstart='startDrag(${taskIndex})' onclick='enablePopupWindow(${taskIndex}); renderPopupTaskCardHtml(${taskIndex})'>
             <div class='taskContainer'>
@@ -137,7 +138,7 @@ function toDoCardHtml(arrayIndex) {
                     <span class='taskHeadlineContent'>${cardTitle}</span>
                     <span class='taskContent'>${cardDescription}</span>
                 </div>
-                <div class='doneBar' id= ${doneId}>
+                <div  ${donebarClass} id= ${doneId}>
                     <div class='doneBarOuter' id='doneBarOuter${taskIndex}'>
                         <div style='background-color: #29ABE2; height: 8px; width: ${percentDone}%;' id='doneBar${taskIndex}'></div>
                     </div>
@@ -169,8 +170,9 @@ function inProgressHtml(arrayIndex) {
 	let subTasksAmount = workStatus1Array[arrayIndex]['subTasks'].length;
 	let subTaskDoneAmount = determindSubTasksDone(arrayIndex, workStatusArrayNo);
 	let percentDone = calculatePercentage(subTaskDoneAmount, subTasksAmount);
+    let donebarClass = 'class="doneBar"';
+    if (subTasksAmount == 0) donebarClass = 'class="doneBar d-none"';
     let doneId = 'dBar' + taskIndex;
-    setTimeout(()=> noSubtaskAvailable(subTasksAmount, doneId), 500);
 	return /*html*/ `
             <div class='taskBackground' id='taskCard${taskIndex}' draggable='true' ondragstart='startDrag(${taskIndex})' onclick='enablePopupWindow(${taskIndex}); renderPopupTaskCardHtml(${taskIndex})'>
                 <div class='taskContainer'>
@@ -181,7 +183,7 @@ function inProgressHtml(arrayIndex) {
                         <span class='taskHeadlineContent'>${cardTitle}</span>
                         <span class='taskContent'>${cardDescription}</span>
                     </div>
-                    <div class='doneBar' id= ${doneId}>
+                    <div ${donebarClass} id= ${doneId}>
                         <div class='doneBarOuter' id='doneBarOuter${taskIndex}'>
                             <div style='background-color: #29ABE2; height: 8px; width: ${percentDone}%;' id='doneBar${taskIndex}'></div>
                         </div>
@@ -214,7 +216,8 @@ function awaitingFeedbackHtml(arrayIndex) {
 	let subTaskDoneAmount = determindSubTasksDone(arrayIndex, workStatusArrayNo);
 	let percentDone = calculatePercentage(subTaskDoneAmount, subTasksAmount);
     let doneId = 'dBar' + taskIndex;
-    setTimeout(()=> noSubtaskAvailable(subTasksAmount, doneId), 500);
+    let donebarClass = 'class="doneBar"';
+    if (subTasksAmount == 0) donebarClass = 'class="doneBar d-none"';
 	return /*html*/ `
         <div class='taskBackground' id='taskCard${taskIndex}' draggable='true' ondragstart='startDrag(${taskIndex})' onclick='enablePopupWindow(${taskIndex}); renderPopupTaskCardHtml(${taskIndex})'>
             <div class='taskContainer'>
@@ -225,7 +228,7 @@ function awaitingFeedbackHtml(arrayIndex) {
                     <span class='taskHeadlineContent'>${cardTitle}</span>
                     <span class='taskContent'>${cardDescription}</span>
                 </div>
-                <div class='doneBar' id= ${doneId}>
+                <div ${donebarClass} id= ${doneId}>
                     <div class='doneBarOuter' id='doneBarOuter${taskIndex}'>
                         <div style='background-color: #29ABE2; height: 8px; width: ${percentDone}%;' id='doneBar${taskIndex}'></div>
                     </div>
@@ -258,7 +261,8 @@ function doneHtml(arrayIndex) {
 	let subTaskDoneAmount = determindSubTasksDone(arrayIndex, workStatusArrayNo);
 	let percentDone = calculatePercentage(subTaskDoneAmount, subTasksAmount);
     let doneId = 'dBar' + taskIndex;
-    setTimeout(()=> noSubtaskAvailable(subTasksAmount, doneId), 500);
+    let donebarClass = 'class="doneBar"';
+    if (subTasksAmount == 0) donebarClass = 'class="doneBar d-none"';
 	return /*html*/ `
         <div class='taskBackground' id='taskCard${taskIndex}' draggable='true' ondragstart='startDrag(${taskIndex})' onclick='enablePopupWindow(${taskIndex}); renderPopupTaskCardHtml(${taskIndex})'>
             <div class='taskContainer'>
@@ -269,7 +273,7 @@ function doneHtml(arrayIndex) {
                     <span class='taskHeadlineContent'>${cardTitle}</span>
                     <span class='taskContent'>${cardDescription}</span>
                 </div>
-                <div class='doneBar' id= ${doneId}>
+                <div ${donebarClass} id= ${doneId}>
                     <div class='doneBarOuter' id='doneBarOuter${taskIndex}'>
                         <div style='background-color: #29ABE2; height: 8px; width: ${percentDone}%;' id='doneBar${taskIndex}'></div>
                     </div>

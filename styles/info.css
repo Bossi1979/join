@@ -80,6 +80,7 @@
     width: 50%;
     height: 25px;
     border-color: white;
+    border-width: 0px;
 }
 
 .infoPopup button:hover {
