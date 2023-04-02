@@ -6,12 +6,6 @@ function generateAddTaskHtml() {
 	return /*html*/ `
 	
 	<div class="testResponsiv" id="testResponsiv">
-		<!-- <div class="taskAddedToBoard1 d-none" id="taskCreatedIndication1">
-			<div class="taskAddedToBoardContainer">
-				<span>Task added to board</span>
-				<img src="./assets/img/img_board_w.png" />
-			</div>
-		</div> -->
 	<div class="addTaskHeadlineDiv">
 		<h2 class="addTHeadline">Add Task</h2>
 	</div>

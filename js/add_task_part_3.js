@@ -78,6 +78,7 @@ function unselectOtherBtn(idList) {
 
 /**
  * Deselects the priority button with the specified name.
+ * 
  * @param {string} btnName - The name of the priority button.
  */
 function deselectPrioBtn(btnName) {

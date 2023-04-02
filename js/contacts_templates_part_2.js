@@ -137,6 +137,7 @@ async function addContactSave(name, email, phone, firstLetter, secondLetter, col
     });
     await saveTask();
     closeNewContact();
+    closeEditContact();
     userInAlphabetArray();
 }
 

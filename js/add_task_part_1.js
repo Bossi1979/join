@@ -370,11 +370,8 @@ function resetCatSelection() {
  * @param {number} catId - This value is equal to the index of the category list of the selected category.
  */
 function selectCategory(catId) {
-	if (newCategoryCreationIsSelected(catId)) {
-		setSettingsForNewCategoryInput();
-	} else {
-		setSettingsForExistingCategory(catId);
-	}
+	if (newCategoryCreationIsSelected(catId)) setSettingsForNewCategoryInput();
+	else setSettingsForExistingCategory(catId);
 }
 
 /**

@@ -51,9 +51,6 @@ async function deleteButton(taskIndex) {
 	confirmDelete();
 	await saveTask();
 	setTimeout(renderBoardAfterSave, 2000);
-	// await renderBoard();
-	// await createWorkStatusArrays();
-	// renderAllCards();
 }
 
 /**
@@ -232,8 +229,6 @@ function startIntervalWhenOff() {
 /**
  * Starts an interval to show the task creation popup when it is shown and the screen is too narrow.
  *
- * @function
- * @returns {void}
  */
 function startIntervalWhenOn() {
 	const interval = setInterval(() => {
@@ -261,8 +256,6 @@ function addTaskContactAutomaticResponisive() {
 /**
  * Set the addTaskOpen variable to `false` to indicate that the task creation popup window has been closed.
  *
- * @function
- * @returns {void}
  */
 function trackThatAddTaskIsClose() {
 	addTaskOpen = false;
@@ -272,36 +265,44 @@ function trackThatAddTaskIsClose() {
 /**
  * Set the addTaskOpen variable to `true` to indicate that the task creation popup is allowed to be displayed.
  *
- * @function
- * @returns {void}
  */
 function allowAddTaskPopUp() {
 	addTaskOpen = true;
 }
 
-// function noSubtaskAvailable(subTasksAmount, doneId){
-// 	let doneBarElement = document.getElementById(doneId);
-// 	if (subTasksAmount == 0) doneBarElement.classList.add('d-none');
-// }
-
+/**
+ * Adds confirmation text for editing a taskcard and displays the confirmation div.
+ */
 function confirmEdit(){
 	addConfimationEditText();
 	showConfirmationDiv();
 }
 
+/**
+ * Adds confirmation text for deleting a taskcard and displays the confirmation div.
+ */
 function confirmDelete(){
 	addConfimationDeleteText();
 	showConfirmationDiv();
 }
 
+/**
+ * Displays the confirmation div.
+ */
 function showConfirmationDiv(){
 	document.getElementById('confimationDiv').classList.add('showConfimDiv');
 }
 
+/**
+ * Adds confirmation text for editing a taskcard.
+ */
 function addConfimationEditText(){
 	document.getElementById('confimationText'). innerHTML = 'Taskcard will be edited';
 }
 
+/**
+ * Adds confirmation text for deleting a taskcard.
+ */
 function addConfimationDeleteText(){
 	document.getElementById('confimationText'). innerHTML = 'Taskcard will be delete';
 }

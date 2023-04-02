@@ -77,14 +77,12 @@ async function userInAlphabetArray() {
  */
 window.onresize = function contactListAutomaticResponisive() {
 	const rightContainer = document.getElementById('contactContainerRight');
-
 	if (window.innerWidth > 850) {
 		autoResponsive = true;
 		if (!rightContainer) return;
 		rightContainer.style.display = 'flex';
 		showContact(i);
 	}
-
 	if (window.innerWidth < 850 && listOpen && autoResponsive) {
 		showContactList();
 		autoResponsive = false;
@@ -106,15 +104,6 @@ function alphabet() {
  * @returns {void}
  */
 function openEditContact(i) {
-	// let email = allUsers[i].email;
-	// if (guestLoggedIn) {
-	// 	alert('please sign in first');
-	// 	return;
-	// }
-	// if (email == guestEmail) {
-	// } else {
-	// 	openEditContactsOf(allUsers, i);
-	// }
 	openEditContactsOf(allUsers, i);
 }
 
@@ -145,10 +134,6 @@ function openEditContactsOf(arr, i) {
  * It opens a new contact form.
  */
 function openNewContact() {
-	// if (guestLoggedIn) {
-	// 	alert('Sorry, does not work with guest status!');
-	// 	return;
-	// }
 	document.getElementById('boardPopup').classList.remove('d-none');
 	document.getElementById('new_contact').classList.remove('d-none');
 	document.getElementById('new_contact').innerHTML = '';
@@ -244,13 +229,13 @@ function showContactList() {
  * If the user is not logged in as a guest, then run the addContactHelp function.
  */
 async function addContact() {
-		let name = document.getElementById('newUserName');
-		let email = document.getElementById('newUserEmail');
-		let phone = document.getElementById('newUserPhone');
-		let newNameRequired = document.getElementById('newContentNameRequired');
-		let newEmailRequired = document.getElementById('newContentEmailRequired');
-		let newPhoneRequired = document.getElementById('newContentPhoneRequired');
-		addContactHelp(name, email, phone, newNameRequired, newEmailRequired, newPhoneRequired);
+	let name = document.getElementById('newUserName');
+	let email = document.getElementById('newUserEmail');
+	let phone = document.getElementById('newUserPhone');
+	let newNameRequired = document.getElementById('newContentNameRequired');
+	let newEmailRequired = document.getElementById('newContentEmailRequired');
+	let newPhoneRequired = document.getElementById('newContentPhoneRequired');
+	addContactHelp(name, email, phone, newNameRequired, newEmailRequired, newPhoneRequired);
 }
 
 /**
@@ -285,7 +270,7 @@ async function calculateNewAllUserArray(name, email, phone) {
  * @param i - The index of the contact to edit.
  */
 function saveEditContact(i) {
-	editContact(i);
+	validateEditContact(i);
 }
 
 /**
@@ -304,89 +289,5 @@ async function editContact(i) {
 	editContactSave(name, email, password, phone, firstLetter, secondLetter, colorIndex, i);
 }
 
-/**
- * Checks whether the passed letter matches the passed delete question content.
- * @param {number} i index of user of allUsers Array
- * @returns
- */
-async function deleteContactQuestion(i, confirm) {
-	let letter = allUsers[i].firstSecondLetter;
-	let email = allUsers[i].email;
-	let deleteQuestion = document.getElementById('deleteContactQuestion');
-	let deleteQuestionInner = document.getElementById('deleteContactQuestion').innerHTML;
-	let deleteQuestion1 = document.getElementById('deleteContactQuestion1');
-	let deleteQuestionInner1 = document.getElementById('deleteContactQuestion1').innerHTML;
-	if (guestLoggedIn || email == guestEmail) return;
-	if (deletionRequested(letter, deleteQuestionInner)) {
-		deleteQuestion.innerHTML = `Delete ? <br>Click here to<br> confirm.`;
-		deleteQuestion.style = 'font-size: 16px; text-align: center;';
-		deleteQuestion1.innerHTML = 'Cancel Deletion';
-	} else if(deleteQuestionInner == `Delete ? <br>Click here to<br> confirm.` && confirm == 'Y'){
-		deleteUser(i);
-	} else if (deleteQuestionInner1 == 'Cancel Deletion' && confirm == 'N'){
-		deleteQuestion.innerHTML = `${letter}`;
-		deleteQuestion.style = 'font-size: 47px; text-align: center;';
-		deleteQuestion1.innerHTML = `- Delete Contact  ${letter}`;
-	}
-}
 
-/**
- * Checks whether the passed letter matches the passed delete question content.
- * @param {string} letter The letter to be compared to the delete question content.
- * @param {string} deleteQuestionInner The delete question content to which the letter is compared.
- * @returns {boolean} Returns `true` if the letter matches the delete question content, `false` otherwise.
- */
-function deletionRequested(letter, deleteQuestionInner) {
-	return letter === deleteQuestionInner;
-}
 
-/**
- * Deletes a user from the array allUsers
- * 
- * @param {number} i - user index
- */
-async function deleteUser(i) {
-	allUsers.splice(i, 1);
-	await renderContactsAfterDeletion();
-}
-
-/**
- * This function is called when the user clicks on the contacts delete button in the menu. It loads the
- * contacts page and renders the content.
- */
-async function renderContactsAfterDeletion(){
-	document.getElementById('content').innerHTML = '';
-	document.getElementById('content').innerHTML = renderContentHTML();
-	sliderMenuShown = false;
-	selectedMenuButton(4);
-	await userInAlphabetArray();
-	loadContributorsLetter();
-	coworkersToAssignTo = transferallUserData();
-	initContactsMobHighlight();
-	await saveTask();
-}
-
-/**
- * Checks if the given email address is already taken by another user.
- *
- * @param {HTMLElement} newEmailRequired - The element representing the error message for the email input.
- * @param {string} name - The name value entered by the user.
- * @param {string} email - The email value entered by the user.
- * @param {string} phone - The phone number value entered by the user.
- * @param {string} valueToCheck - The email value to be checked.
- */
-function comparisonEmailHelp(newEmailRequired, name, email, phone, valueToCheck) {
-    check = 0;
-    for (let i = 0; i < allUsers.length; i++) {
-        let testValue = allUsers[i].email;
-        if (testValue === valueToCheck) {
-            check = 1;
-            break;
-        }
-    }
-    if (check == 1) {
-        newEmailRequired.classList.remove('d-none');
-        newEmailRequired.classList.add('requiredOn');
-        newEmailRequired.innerHTML = `This email address is not available!!`;
-    } else calculateNewAllUserArray(name, email, phone);
-}

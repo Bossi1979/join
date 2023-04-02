@@ -37,7 +37,7 @@ function chooseRightUserArray() {
 }
 
 /**
- * Calculates the user in an alphabet array based on their first letter.
+ * Calculates the user in an alphabet array based on their last letter.
  * 
  * @param {Array} arr - The array of users.
  */
@@ -48,7 +48,7 @@ function calculateUserInAlphabetArray(arr) {
         let name = user.name;
         let email = user.email;
         let letter = user.firstSecondLetter;
-        // let firstLetter = user.firstSecondLetter[1];
+        // let firstLetter = user.firstSecondLetter[0];
         let secondLetter = user.firstSecondLetter[1];
         alphabetOrd[secondLetter].push({ name: name, email: email, id: id, letter: letter, colorIndex: colorIndex, });
     });
@@ -59,7 +59,6 @@ function calculateUserInAlphabetArray(arr) {
  * add the letter to the HTML, and then loop through the array and add the names to the HTML.
  */
 function calculateAndShowAlphabet() {
-    debugger;
     for (let alphabetLetter in alphabetOrd) {
         if (alphabetOrd[alphabetLetter].length > 0) {
             document.getElementById('Contact_list').innerHTML += showLettersHTML(alphabetLetter);
@@ -137,7 +136,7 @@ function addContactHelp(name, email, phone, newNameRequired, newEmailRequired, n
     checkNameInput(name, newNameRequired);
     checkEmailInput(email, newEmailRequired);
     checkPhoneInput(phone, newPhoneRequired);
-    if (allInformationTypedIn(newNameRequired, newEmailRequired, newPhoneRequired)) {
+    if (allInformationTypedIn(newNameRequired, newEmailRequired, newPhoneRequired) && !editContactShown) {
         comparisonEmailAddress(newEmailRequired, name.value, email.value, phone.value);
     }
 }
@@ -189,8 +188,7 @@ function checkPhoneInput(phone, newPhoneRequired) {
         additionalInfoMessage(10);
     } else {
         newPhoneRequired.classList.remove('requiredOn');
-        newPhoneRequired.classList.add('d-none');
-        
+        newPhoneRequired.classList.add('d-none'); 
     }
 }
 
@@ -302,21 +300,21 @@ function openEditContactHTML(color, letter, name, email, phone, i) {
                             <input class="inputName" id="editUserName" type="text" value="${name}">
                             <img src="./assets/img/name_logo.png" alt="">
                         </div>
-                        <span class="required d-none">First and Last Name</span>
+                        <span class="required d-none" id='editContentNameRequired'>First and Last Name</span>
                     </div>
                     <div class="nameContainer">
                         <div class="inputEditContainer">
                             <input class="inputName" id="editUserEmail" type="email" value="${email}">
                             <img src="./assets/img/email_Logo.png" alt="">
                         </div>
-                        <span class="required d-none">This field is required</span>
+                        <span class="required d-none" id='editContentEmailRequired'>Email not valid</span>
                     </div>
                     <div class="nameContainer">
                         <div class="inputEditContainer">
                             <input class="inputName" id="editUserPhone" type="number" value="${phone}">
                             <img src="./assets/img/phoneLogo.png" alt="">
                         </div>
-                        <span class="required d-none">This field is required</span>
+                        <span class="required d-none" id='editContentPhoneRequired'>min 8 numbers</span>
                     </div>
                 </div>
             </div>

@@ -48,9 +48,7 @@ function showAddDiv() {
 	if(selectedMenuBtnId ==3){
 		document.getElementById('addTaskToBoardIndicator').classList.remove('d-none');
 		document.getElementById('addTaskToBoardIndicator').classList.add('taskCreatedIndication1');
-	}else{
-		document.getElementById('taskCreatedIndication').classList.add('taskCreatedIndication');
-	}
+	}else document.getElementById('taskCreatedIndication').classList.add('taskCreatedIndication');
 }
 
 /**
@@ -60,9 +58,7 @@ function notShowAddDiv() {
 	if(selectedMenuBtnId ==3){
 		document.getElementById('addTaskToBoardIndicator').classList.add('d-none');
 		document.getElementById('addTaskToBoardIndicator').classList.remove('taskCreatedIndication1');
-	}else{
-		document.getElementById('taskCreatedIndication').classList.remove('taskCreatedIndication');
-	}
+	}else document.getElementById('taskCreatedIndication').classList.remove('taskCreatedIndication');
 }
 
 /**
@@ -75,11 +71,8 @@ function notShowAddDiv() {
 function checkInputs(workflow) {
 	getReqiredFieldValues();
 	resetRequiredWarnings();
-	if (requiredFieldAreNotValid()) {
-		setRequiredTextWarnings();
-	} else {
-		createTaskData(workflow);
-	}
+	if (requiredFieldAreNotValid()) setRequiredTextWarnings();
+	else createTaskData(workflow);
 }
 
 /**
@@ -277,8 +270,6 @@ function clearValidationMessages() {
  * @returns {Promise<void>} - A Promise that resolves when the task data is successfully saved.
  */
 async function createTaskData(workflow) {
-	
-	
 	await loadTask();
 	getDataFromFomular();
 	await createAssignToListForSave();
