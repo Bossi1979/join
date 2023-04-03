@@ -52,6 +52,11 @@ let messageArray = [
         'message': 'The phone number you entered is invalid. Please enter a phone number with at least eight digits.',
         'messageId': 10,
     },
+    {
+        'title': 'Deletion not Allowed',
+        'message': 'It is not allowed, to delete the contact of the logged User!',
+        'messageId': 11,
+    },
 ]
 
 let infoPopupOpened = false;

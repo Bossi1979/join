@@ -136,7 +136,7 @@ function addContactHelp(name, email, phone, newNameRequired, newEmailRequired, n
     checkNameInput(name, newNameRequired);
     checkEmailInput(email, newEmailRequired);
     checkPhoneInput(phone, newPhoneRequired);
-    if (allInformationTypedIn(newNameRequired, newEmailRequired, newPhoneRequired) && !editContactShown) {
+    if (allInformationTypedIn(newNameRequired, newEmailRequired, newPhoneRequired)) {
         comparisonEmailAddress(newEmailRequired, name.value, email.value, phone.value);
     }
 }

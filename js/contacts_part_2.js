@@ -80,8 +80,22 @@ function deletionRequested(letter, deleteQuestionInner) {
  * @param {number} i - user index
  */
 async function deleteUser(i) {
-	allUsers.splice(i, 1);
-	await renderContactsAfterDeletion();
+	if(loggedUser[0] == i) insertInfoMessage(11);
+	else if(loggedUser[0] > i){
+		allUsers.splice(i, 1);
+		loggedUser[0] -= 1;
+		loggedInUserIndex -= 1;
+		await setLoggedUserLocalStorage();
+		await renderContactsAfterDeletion();
+	}else{
+		allUsers.splice(i, 1);
+		await renderContactsAfterDeletion();
+	}
+}
+
+async function setLoggedUserLocalStorage(){
+	let loggedUserAsString = JSON.stringify(loggedUser);
+	localStorage.setItem('loggedUser', loggedUserAsString);
 }
 
 /**
@@ -130,7 +144,7 @@ function comparisonEmailHelp(newEmailRequired, name, email, phone, valueToCheck)
  * @param {number} i - The index of the contact to be edited.
  */
 async function validateEditContact(i) {
-	editContactShown = true;
+	// editContactShown = true;
 	let name = document.getElementById('editUserName');
 	let email = document.getElementById('editUserEmail');
 	let phone = document.getElementById('editUserPhone');
