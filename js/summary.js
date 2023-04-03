@@ -238,7 +238,8 @@ async function getAllValuesForOverview() {
  * and filters them by status and priority.
  */
 function getTasks() {
-	tasksInBoard = allUserTasks(joinTaskArray);
+	// tasksInBoard = allUserTasks(joinTaskArray);
+	tasksInBoard = joinTaskArray;
 	toDoTasks = filterTasks(joinTaskArray, 0);
 	inProgressTasks = filterTasks(joinTaskArray, 1);
 	awatingFeedbackTasks = filterTasks(joinTaskArray, 2);

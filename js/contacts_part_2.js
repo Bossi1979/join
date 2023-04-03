@@ -10,7 +10,7 @@ async function deleteContactQuestion(i, confirm) {
 	let deleteQuestionInner = document.getElementById('deleteContactQuestion').innerHTML;
 	let deleteQuestion1 = document.getElementById('deleteContactQuestion1');
 	let deleteQuestionInner1 = document.getElementById('deleteContactQuestion1').innerHTML;
-	if (guestLoggedIn || email == guestEmail) return;
+	// if (guestLoggedIn || email == guestEmail) return;
 	if (deletionRequested(letter, deleteQuestionInner)) openDeleteMenu(deleteQuestion, deleteQuestion1);
 	else if (deletionConfirmed(deleteQuestionInner, confirm)) deleteUser(i);
 	else if (deletionCanceled(deleteQuestionInner1, confirm)) closeDeletionMenu(deleteQuestion, deleteQuestion1, letter);
