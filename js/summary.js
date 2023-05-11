@@ -19,7 +19,7 @@ let doneTasks = [];
  * Initializes the task summary and loads the data from the backend server.
  */
 async function initSummary() {
-	setURL('https://stefan-boskamp.developerakademie.net/join/smallest_backend_ever');
+	setURL('https://join.stefan-boskamp.de/smallest_backend_ever');
 	await loadTask();
 	resetsValues();
 	selectedMenuButton(1);

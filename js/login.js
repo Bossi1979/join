@@ -17,7 +17,7 @@ async function outLogoutMob() {
  * and loading the necessary tasks.
  */
 async function initLoginMob() {
-	setURL('https://stefan-boskamp.developerakademie.net/join/smallest_backend_ever');
+	setURL('https://join.stefan-boskamp.de/smallest_backend_ever');
 	await loadTask();
 }
 
