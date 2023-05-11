@@ -10,7 +10,7 @@ function generateAddTaskHtml() {
 		<h2 class="addTHeadline">Add Task</h2>
 	</div>
 	<div class="mainAddTaskContainer">
-		<div class="addTaskToBoardIndicator"  id="addTaskToBoardIndicator">
+		<div class="addTaskToBoardIndicator d-none"  id="addTaskToBoardIndicator">
 			<div class="taskAddedToBoardContainer">
 				<span>Task added to board</span>
 				<img src="./assets/img/img_board_w.png" />
